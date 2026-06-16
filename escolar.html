@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infantil, Escolar y Juguetería | Mundo Kids</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #f1f8e9;
+}
+
+/* BOTÓN VOLVER */
+.back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.back-btn {
+    background: #4a90e2;
+    color: white;
+    padding: 10px 22px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(74,144,226,0.3);
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: #2c6cb0;
+    transform: translateX(-5px);
+}
+
+/* CONTENEDOR PRINCIPAL */
+.wrapper {
+    width: 95%;
+    max-width: 1400px;
+    margin: 40px auto;
+    background: #fffef7;
+    border-radius: 32px;
+    padding: 30px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+/* HEADER */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 800;
+    background: #ffe0b5;
+    padding: 6px 20px;
+    border-radius: 60px;
+    color: #e67e22;
+}
+
+.cart-box {
+    position: relative;
+}
+
+.cart {
+    background: #f4a261;
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 40px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.cart:hover {
+    background: #e76f51;
+}
+
+.cart-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 52px;
+    background: #fff;
+    width: 320px;
+    border-radius: 24px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    padding: 18px;
+    z-index: 100;
+    border: 1px solid #fad6a5;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 13px;
+    background: #fff6e8;
+    padding: 6px 12px;
+    border-radius: 30px;
+}
+
+.cart-item button {
+    background: none;
+    border: none;
+    color: #e76f51;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* BUSCADOR */
+.search-container {
+    margin-bottom: 25px;
+}
+
+.search-box {
+    display: flex;
+    gap: 12px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-input {
+    flex: 1;
+    padding: 14px 20px;
+    border: 2px solid #ffe0b5;
+    border-radius: 60px;
+    font-size: 16px;
+    transition: 0.2s;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #f4a261;
+    box-shadow: 0 0 0 3px rgba(244,162,97,0.2);
+}
+
+.search-btn {
+    background: #4a90e2;
+    color: white;
+    border: none;
+    padding: 0 28px;
+    border-radius: 60px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.2s;
+}
+
+.search-btn:hover {
+    background: #2c6cb0;
+}
+
+/* HERO */
+.hero {
+    background: linear-gradient(135deg, #ffe6c7, #ffd6a8);
+    padding: 32px;
+    border-radius: 48px;
+    margin-bottom: 40px;
+    text-align: center;
+    color: #4a3b2c;
+}
+
+.hero h1 {
+    font-size: 38px;
+    margin-bottom: 12px;
+    font-weight: 800;
+}
+
+.hero p {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* CONTADOR RESULTADOS */
+.results-count {
+    text-align: center;
+    margin: 12px auto 20px;
+    background: #fdefd4;
+    width: fit-content;
+    padding: 5px 20px;
+    border-radius: 60px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.results-count span {
+    font-weight: 800;
+    color: #e67e22;
+}
+
+/* PRODUCTOS */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 28px;
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 28px;
+    padding: 18px;
+    text-align: center;
+    transition: 0.25s ease;
+    cursor: pointer;
+    border: 1px solid #f3e1ca;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.04);
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 28px rgba(0,0,0,0.1);
+    border-color: #f4a261;
+}
+
+.card img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    border-radius: 20px;
+    background: #faf2e6;
+    cursor: pointer;
+}
+
+.price {
+    font-weight: 700;
+    font-size: 20px;
+    margin: 12px 0;
+    color: #e76f51;
+}
+
+.btn {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 60px;
+    background: #4a90e2;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    background: #2c6cb0;
+    transform: scale(0.97);
+}
+
+.no-results {
+    grid-column: 1/-1;
+    text-align: center;
+    padding: 50px;
+    background: #fff2e2;
+    border-radius: 48px;
+    color: #ba8b4a;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #ffe0b5;
+    border-radius: 32px;
+    margin-top: 40px;
+    font-weight: 500;
+}
+
+/* MODAL IMAGEN */
+#imageModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+#imageModal img {
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 20px;
+}
+.modal-content {
+    position: relative;
+}
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.6);
+    color: white;
+    font-size: 28px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.prev { left: 20px; }
+.next { right: 20px; }
+#imageModal .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 32px;
+    color: white;
+    cursor: pointer;
+    background: rgba(0,0,0,0.5);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.indicators {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+.indicators span {
+    width: 10px;
+    height: 10px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 50%;
+    cursor: pointer;
+}
+.indicators span.active {
+    background: white;
+    transform: scale(1.2);
+}
+
+/* MODAL PRODUCTO */
+.product-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1100;
+}
+.product-content {
+    background: white;
+    padding: 25px;
+    border-radius: 40px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+}
+.close-product {
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    font-size: 28px;
+    cursor: pointer;
+}
+@media (max-width: 700px) {
+    .wrapper { padding: 20px; }
+    .hero h1 { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+<div class="back-button">
+    <a href="javascript:history.back()" class="back-btn">← Atrás</a>
+</div>
+
+<div class="wrapper">
+    <header>
+        <div class="logo">🧸 Infantil · Escolar · Juguetería</div>
+        <div class="cart-box">
+            <div class="cart" onclick="toggleCart()">🛒 <span id="cart-count">0</span> | $<span id="cart-total">0</span></div>
+            <div class="cart-dropdown" id="cart-dropdown">
+                <div id="cart-items"></div>
+                <hr>
+                <strong>Total: $<span id="dropdown-total">0</span></strong>
+                <button class="btn" style="margin-top:12px;" onclick="openCheckout()">Finalizar compra</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="search-container">
+        <div class="search-box">
+            <input type="text" id="searchInput" class="search-input" placeholder="Buscar juguetes, mochilas, útiles escolares...">
+            <button class="search-btn" onclick="searchProducts()">🔍 Buscar</button>
+        </div>
+        <div id="resultsCount" class="results-count">Mostrando <span id="visibleCount">0</span> de <span id="totalCount">0</span> productos</div>
+    </div>
+
+    <div class="hero">
+        <h1>🎈 Diversión, Aprendizaje y Magia ✏️</h1>
+        <p>Todo para tus pequeños: juguetes, útiles escolares, mochilas y más</p>
+    </div>
+
+    <!-- CATÁLOGO DE PRODUCTOS -->
+    <div class="products">
+        <!-- Producto 1: 1 imagen -->
+        <div class="card" data-name="RELOJ KR10 MINI SMARTWATCH" data-price="75500" data-description="Reloj inteligente para niños, cámara, juegos, podómetro, pantalla táctil." data-images='["kr10-1.jpeg"]'>
+            <img src="kr10-1.jpeg" alt="KR10 Mini" onerror="this.src='https://placehold.co/400x300/F9E7D2/e67e22?text=KR10+Smartwatch'">
+            <h4>RELOJ KR10 MINI SMARTWATCH</h4>
+            <div class="price">$75.500</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <!-- Producto 2: 1 imagen -->
+        <div class="card" data-name="CAMARA SELFIE VIDEO DIGITAL INFANTIL" data-price="98000" data-description="Cámara resistente al agua, uso bajo el agua 30m, ideal para deportes acuáticos." data-images='["camara-1.jpeg"]'>
+            <img src="camara-1.jpeg" alt="Cámara infantil" onerror="this.src='https://placehold.co/400x300/F5E6D3/e67e22?text=Cámara+Infantil'">
+            <h4>CAMARA SELFIE VIDEO DIGITAL INFANTIL</h4>
+            <div class="price">$98.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <!-- Producto 3: 1 imagen -->
+        <div class="card" data-name="TAPETE PLEGABLE PARA GATEO INFANTIL" data-price="75000" data-description="Alfombra plegable infantil acolchada, antideslizante, fácil de limpiar." data-images='["tapete-1.jpeg"]'>
+            <img src="tapete-1.jpeg" alt="Tapete plegable" onerror="this.src='https://placehold.co/400x300/FFF0E0/e67e22?text=Tapete+Gateo'">
+            <h4>TAPETE PLEGABLE PARA GATEO INFANTIL</h4>
+            <div class="price">$75.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <!-- Producto 4: 1 imagen -->
+        <div class="card" data-name="COMBO RELOJ PARLANTE 2 MICROFONO" data-price="75000" data-description="Reloj con parlante y micrófono, grabadora, ideal para juegos y karaoke." data-images='["reloj-1.jpeg"]'>
+            <img src="reloj-1.jpeg" alt="Reloj parlante" onerror="this.src='https://placehold.co/400x300/FCEBD9/e67e22?text=Reloj+Parlante'">
+            <h4>COMBO RELOJ PARLANTE 2 MICROFONO</h4>
+            <div class="price">$75.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <!-- Producto 5: 1 imagen -->
+        <div class="card" data-name="PELUCHE ELEFANTE MUSICAL Y MOVIMIENTO" data-price="75000" data-description="Elefante de peluche que se mueve y reproduce canciones, luces LED." data-images='["elefante-1.jpeg"]'>
+            <img src="elefante-1.jpeg" alt="Elefante musical" onerror="this.src='https://placehold.co/400x300/FCEBD9/e67e22?text=Elefante+Musical'">
+            <h4>PELUCHE ELEFANTE MUSICAL Y MOVIMIENTO</h4>
+            <div class="price">$75.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <!-- Producto 6: 1 imagen -->
+        <div class="card" data-name="CALENTADOR DE BIBERON BEBES" data-price="28500" data-description="Calienta biberones de forma segura, temperatura regulable, portátil." data-images='["calentador-1.jpeg"]'>
+            <img src="calentador-1.jpeg" alt="Calentador biberón" onerror="this.src='https://placehold.co/400x300/FFE6D5/e67e22?text=Calentador+Biberón'">
+            <h4>CALENTADOR DE BIBERON BEBES</h4>
+            <div class="price">$28.500</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <!-- Producto 7: 1 imagen -->
+        <div class="card" data-name="DIADEMA P9 PRO MAX" data-price="45000" data-description="Diadema bluetooth con luces, manos libres para niños, sonido envolvente." data-images='["diadema-1.jpeg"]'>
+            <img src="diadema-1.jpeg" alt="Diadema P9" onerror="this.src='https://placehold.co/400x300/FEE3CD/e67e22?text=Diadema+P9'">
+            <h4>DIADEMA P9 PRO MAX</h4>
+            <div class="price">$45.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <!-- Producto 8: 1 imagen -->
+        <div class="card" data-name="JUEGO DE MESA 8 EN 1" data-price="32000" data-description="Set de 8 juegos clásicos: ajedrez, damas, ludo, serpientes, etc." data-images='["juego-1.jpeg"]'>
+            <img src="juego-1.jpeg" alt="Juego mesa" onerror="this.src='https://placehold.co/400x300/FFF0E5/e67e22?text=Juego+8+en+1'">
+            <h4>JUEGO DE MESA 8 EN 1</h4>
+            <div class="price">$32.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <!-- Producto 9: 1 imagen -->
+        <div class="card" data-name="CARTUCHERA MULTIFUNCION" data-price="35000" data-description="Cartuchera grande con múltiples compartimentos, organizador escolar." data-images='["cartuchera-1.jpeg"]'>
+            <img src="cartuchera-1.jpeg" alt="Cartuchera" onerror="this.src='https://placehold.co/400x300/FDE8D9/e67e22?text=Cartuchera'">
+            <h4>CARTUCHERA MULTIFUNCION</h4>
+            <div class="price">$35.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <!-- Producto 10: 1 imagen -->
+        <div class="card" data-name="IMPRESORA TERMICA INALAMBRICA" data-price="67500" data-description="Impresora térmica portátil para niños, conecta por bluetooth." data-images='["impresora-1.jpeg"]'>
+            <img src="impresora-1.jpeg" alt="Impresora térmica" onerror="this.src='https://placehold.co/400x300/FAD5B5/e67e22?text=Impresora+Térmica'">
+            <h4>IMPRESORA TERMICA INALAMBRICA</h4>
+            <div class="price">$67.500</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <!-- SOFÁ PLEGABLE INFANTIL CON 3 IMÁGENES -->
+        <div class="card" data-name="Sofá Plegable Infantil" data-price="145500" data-description="Sofá suave plegable, ideal para descanso, lectura y juegos." data-images='["sofa-infantil-1.jpeg", "sofa-infantil-2.jpeg", "sofa-infantil-3.jpeg"]'>
+            <img src="sofa-infantil-1.jpeg" alt="Sofá plegable" loading="lazy" onerror="this.src='https://placehold.co/400x300/FDE8D9/e67e22?text=Sofá+Infantil'">
+            <h4>Sofá Plegable Infantil</h4>
+            <div class="price">$145.500</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <!-- Producto 14: 1 imagen -->
+        <div class="card" data-name="MALETA PAÑALERA CON CAMBIADOR" data-price="78500" data-description="Maleta pañalera, incluye cambiador portátil, múltiples bolsillos." data-images='["pañalera-1.jpeg"]'>
+            <img src="pañalera-1.jpeg" alt="Maleta pañalera" onerror="this.src='https://placehold.co/400x300/FCDBBC/e67e22?text=Pañalera'">
+            <h4>MALETA PAÑALERA CON CAMBIADOR</h4>
+            <div class="price">$78.500</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+
+        <!-- Producto 16: 1 imagen -->
+        <div class="card" data-name="PELUCHE STICH RESPIRA SONIDO LUZ" data-price="56000" data-description="Peluche interactivo Stitch que respira, emite sonidos y luces." data-images='["stitch-1.jpeg"]'>
+            <img src="stitch-1.jpeg" alt="Stitch" onerror="this.src='https://placehold.co/400x300/F5DBC4/e67e22?text=Stitch+Luz'">
+            <h4>PELUCHE STICH RESPIRA SONIDO LUZ</h4>
+            <div class="price">$56.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <!-- Producto 17: 1 imagen -->
+        <div class="card" data-name="CAPIBARA MANILLA LUZ SONIDO MOVIMIENTO" data-price="25000" data-description="Pulsera capibara interactiva con luces y sonidos, divertida." data-images='["capibara-1.jpeg"]'>
+            <img src="capibara-1.jpeg" alt="Capibara" onerror="this.src='https://placehold.co/400x300/FCE6D0/e67e22?text=Capibara+Manilla'">
+            <h4>CAPIBARA MANILLA LUZ SONIDO MOVIMIENTO</h4>
+            <div class="price">$25.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <!-- Producto 18: 1 imagen -->
+        <div class="card" data-name="SET MAQUILLAJE NIÑAS" data-price="67200" data-description="Set de maquillaje infantil no tóxico, sombras, labiales, espejo." data-images='["makeup-1.jpeg"]'>
+            <img src="makeup-1.jpeg" alt="Set maquillaje" onerror="this.src='https://placehold.co/400x300/FDE1CA/e67e22?text=Makeup+Niñas'">
+            <h4>SET MAQUILLAJE NIÑAS</h4>
+            <div class="price">$67.200</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+    
+        <!-- Producto 20: 1 imagen -->
+        <div class="card" data-name="MALETA KAWAI 5 EN 1 FASHION" data-price="92000" data-description="Maleta versátil 5 en 1, mochila, carrito, bolso, diseño kawaii." data-images='["kawai-1.jpeg"]'>
+            <img src="kawai-1.jpeg" alt="Maleta kawai" onerror="this.src='https://placehold.co/400x300/F9DEC6/e67e22?text=Kawai+5en1'">
+            <h4>MALETA KAWAI 5 EN 1 FASHION</h4>
+            <div class="price">$92.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <!-- Producto 21: 1 imagen -->
+        <div class="card" data-name="MALETA MOCHILA PELUCHE CAPIBARA" data-price="42000" data-description="Mochila suave de capibara, adorable y funcional para niños." data-images='["mochila-capibara-1.jpeg"]'>
+            <img src="mochila-capibara-1.jpeg" alt="Mochila capibara" onerror="this.src='https://placehold.co/400x300/FBE6D4/e67e22?text=Mochila+Capibara'">
+            <h4>MALETA MOCHILA PELUCHE CAPIBARA</h4>
+            <div class="price">$42.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <!-- Producto 22: 1 imagen -->
+        <div class="card" data-name="SET DE JOYEROA CREATIVA PULSERAS INFANTIL 3 EN 1" data-price="35000" data-description="Set de pulseras coloridas con charms, regalo ideal para niñas." data-images='["pulseras-1.jpeg"]'>
+            <img src="pulseras-1.jpeg" alt="Pulseras" onerror="this.src='https://placehold.co/400x300/FCEAD8/e67e22?text=Pulseras+Niña'">
+            <h4>SET DE JOYERIA CREATIVA PULSERAS INFANTIL 3 EN 1</h4>
+            <div class="price">$35.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+    
+
+    
+
+        <!-- Producto 25: 1 imagen -->
+        <div class="card" data-name="POP IT ASTRONAUTA JUEGO AGILIDAD MENTAL" data-price="28500" data-description="Juego sensorial antiestrés forma astronauta, luces y sonidos." data-images='"popit-1.jpeg"'>
+            <img src="popit-1.jpeg" alt="Pop it" onerror="this.src='https://placehold.co/400x300/FCE2CD/e67e22?text=Popit+Astronauta'">
+            <h4>POP IT ASTRONAUTA JUEGO AGILIDAD MENTAL</h4>
+            <div class="price">$28.500</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <!-- Producto 27: 1 imagen -->
+        <div class="card" data-name="LIBRO MONTESSORI" data-price="28500" data-description="Libro sensorial Montessori, actividades didácticas para peques." data-images='["libro-1.jpeg"]'>
+            <img src="libro-1.jpeg" alt="Libro Montessori" onerror="this.src='https://placehold.co/400x300/FDEEDE/e67e22?text=Libro+Montessori'">
+            <h4>LIBRO MONTESSORI</h4>
+            <div class="price">$28.500</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+    </div>
+
+    <footer>🎒 Mundo Infantil · Juguetes · Escolar · Todos los derechos reservados</footer>
+</div>
+
+<!-- MODALES -->
+<div class="product-modal" id="productModal">
+    <div class="product-content">
+        <span class="close-product">&times;</span>
+        <img id="modal-image" style="width:100%; border-radius:20px;">
+        <h2 id="modal-name"></h2>
+        <p id="modal-description"></p>
+        <p>$<span id="modal-price"></span></p>
+        <button id="modal-add" class="btn">Agregar al carrito</button>
+    </div>
+</div>
+
+<div id="imageModal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <span class="prev">&#10094;</span>
+        <img id="modalImg">
+        <span class="next">&#10095;</span>
+        <div class="indicators"></div>
+    </div>
+</div>
+
+<script>
+let cart = [];
+let currentImagesList = [];
+let currentImageIndex = 0;
+
+function updateCart() {
+    let count = 0, total = 0, html = "";
+    cart.forEach((item, idx) => { 
+        count += item.qty; 
+        total += item.price * item.qty; 
+        html += `<div class="cart-item">${item.name} x${item.qty} <button onclick="removeItem(${idx})">🗑️</button></div>`; 
+    });
+    document.getElementById("cart-count").innerText = count;
+    document.getElementById("cart-total").innerText = total.toLocaleString();
+    document.getElementById("dropdown-total").innerText = total.toLocaleString();
+    document.getElementById("cart-items").innerHTML = html || "Carrito vacío";
+    localStorage.setItem("cartKids", JSON.stringify(cart));
+}
+
+function addToCart(name, price) { 
+    let ex = cart.find(i=>i.name===name); 
+    if(ex) ex.qty++; 
+    else cart.push({name,price,qty:1}); 
+    updateCart(); 
+    alert(`✅ ${name} agregado`); 
+}
+
+function removeItem(idx) { 
+    cart.splice(idx,1); 
+    updateCart(); 
+}
+
+window.removeItem = removeItem;
+
+function toggleCart() { 
+    let d = document.getElementById("cart-dropdown"); 
+    d.style.display = d.style.display === "block" ? "none" : "block"; 
+}
+
+window.toggleCart = toggleCart;
+
+function openCheckout() { 
+    if(!cart.length) return alert("Carrito vacío"); 
+    let num="573213850020", msg="🛍️ Pedido Infantil/Escolar:\n"; 
+    let total=0; 
+    cart.forEach(i=>{
+        msg+=`• ${i.name} x${i.qty} = $${(i.price*i.qty).toLocaleString()}\n`; 
+        total+=i.price*i.qty;
+    }); 
+    msg+=`\n💰 Total: $${total.toLocaleString()}\n👤 Nombre:\n📍 Dirección:\n📞 Teléfono:`; 
+    window.open(`https://wa.me/${num}?text=${encodeURIComponent(msg)}`,"_blank"); 
+}
+
+window.openCheckout = openCheckout;
+
+// Agregar eventos a los botones "Agregar"
+document.querySelectorAll(".add").forEach(btn=>{
+    btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        let card = btn.closest(".card");
+        addToCart(card.dataset.name, parseInt(card.dataset.price));
+    });
+});
+
+// Búsqueda
+function searchProducts() {
+    let term = document.getElementById("searchInput").value.toLowerCase();
+    let cards = document.querySelectorAll(".card");
+    let visible = 0;
+    cards.forEach(card => {
+        let match = term === "" || card.dataset.name.toLowerCase().includes(term);
+        card.style.display = match ? "block" : "none";
+        if(match) visible++;
+    });
+    document.getElementById("visibleCount").innerText = visible;
+    document.getElementById("totalCount").innerText = cards.length;
+}
+
+document.getElementById("searchInput").addEventListener("input", searchProducts);
+
+// Modal de producto (clic en la card)
+document.querySelectorAll(".card").forEach(card => {
+    card.addEventListener("click", function(e) {
+        if(e.target.classList.contains("add") || e.target.tagName === "IMG") return;
+        let modal = document.getElementById("productModal");
+        document.getElementById("modal-image").src = this.querySelector("img").src;
+        document.getElementById("modal-name").innerText = this.dataset.name;
+        document.getElementById("modal-description").innerText = this.dataset.description || "Producto ideal para niños";
+        document.getElementById("modal-price").innerText = parseInt(this.dataset.price).toLocaleString();
+        window.currentProduct = { name: this.dataset.name, price: parseInt(this.dataset.price) };
+        modal.style.display = "flex";
+    });
+});
+
+document.getElementById("modal-add").onclick = () => {
+    if(window.currentProduct) {
+        addToCart(window.currentProduct.name, window.currentProduct.price);
+        document.getElementById("productModal").style.display = "none";
+    }
+};
+
+document.querySelector(".close-product").onclick = () => document.getElementById("productModal").style.display = "none";
+document.getElementById("productModal").onclick = e => { if(e.target === document.getElementById("productModal")) document.getElementById("productModal").style.display = "none"; };
+
+// Modal de imágenes con múltiples imágenes
+function initImageModal() {
+    let modal = document.getElementById("imageModal");
+    let modalImg = document.getElementById("modalImg");
+    let closeBtn = modal.querySelector(".close");
+    let prevBtn = modal.querySelector(".prev");
+    let nextBtn = modal.querySelector(".next");
+    let indicatorsContainer = modal.querySelector(".indicators");
+    
+    function updateIndicators() {
+        indicatorsContainer.innerHTML = "";
+        currentImagesList.forEach((_, idx) => {
+            let dot = document.createElement("span");
+            if(idx === currentImageIndex) dot.classList.add("active");
+            dot.onclick = () => {
+                currentImageIndex = idx;
+                modalImg.src = currentImagesList[currentImageIndex];
+                updateIndicators();
+            };
+            indicatorsContainer.appendChild(dot);
+        });
+    }
+    
+    function updateImage() {
+        modalImg.style.opacity = "0";
+        setTimeout(() => {
+            modalImg.src = currentImagesList[currentImageIndex];
+            modalImg.style.opacity = "1";
+            updateIndicators();
+        }, 150);
+    }
+    
+    document.querySelectorAll(".card img").forEach(img => {
+        img.addEventListener("click", (e) => {
+            e.stopPropagation();
+            let card = img.closest(".card");
+            if(card.dataset.images) {
+                try {
+                    currentImagesList = JSON.parse(card.dataset.images);
+                } catch(e) {
+                    currentImagesList = [img.src];
+                }
+            } else {
+                currentImagesList = [img.src];
+            }
+            currentImageIndex = 0;
+            modalImg.src = currentImagesList[0];
+            modal.style.display = "flex";
+            updateIndicators();
+        });
+    });
+    
+    closeBtn.onclick = () => modal.style.display = "none";
+    prevBtn.onclick = () => {
+        if(currentImagesList.length > 1) {
+            currentImageIndex = (currentImageIndex - 1 + currentImagesList.length) % currentImagesList.length;
+            updateImage();
+        }
+    };
+    nextBtn.onclick = () => {
+        if(currentImagesList.length > 1) {
+            currentImageIndex = (currentImageIndex + 1) % currentImagesList.length;
+            updateImage();
+        }
+    };
+    modal.onclick = e => { if(e.target === modal) modal.style.display = "none"; };
+}
+
+initImageModal();
+
+// Cargar carrito guardado
+if(localStorage.getItem("cartKids")) cart = JSON.parse(localStorage.getItem("cartKids"));
+updateCart();
+searchProducts();
+</script>
+</body>
+</html>

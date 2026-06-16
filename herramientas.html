@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ToolCenter | Herramientas, Ferretería y Accesorios</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #e8e0d5;
+}
+
+/* BOTÓN VOLVER */
+.back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.back-btn {
+    background: #2c3e2f;
+    color: white;
+    padding: 10px 24px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: #1a2e1d;
+    transform: translateX(-5px);
+}
+
+/* CONTENEDOR PRINCIPAL */
+.wrapper {
+    width: 95%;
+    max-width: 1400px;
+    margin: 40px auto;
+    background: #ffffff;
+    border-radius: 40px;
+    padding: 30px;
+    box-shadow: 0 20px 35px rgba(0,0,0,0.08);
+}
+
+/* HEADER */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #2c3e2f, #f39c12);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: -0.5px;
+}
+
+.cart-box {
+    position: relative;
+}
+
+.cart {
+    background: #e67e22;
+    color: #fff;
+    padding: 10px 24px;
+    border-radius: 40px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+    box-shadow: 0 4px 8px rgba(230,126,34,0.3);
+}
+
+.cart:hover {
+    background: #d35400;
+    transform: scale(0.97);
+}
+
+.cart-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 55px;
+    background: #fff;
+    width: 330px;
+    border-radius: 24px;
+    box-shadow: 0 20px 35px rgba(0,0,0,0.15);
+    padding: 18px;
+    z-index: 100;
+    border: 1px solid #e2e8f0;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 13px;
+    background: #fef9e7;
+    padding: 8px 12px;
+    border-radius: 40px;
+}
+
+.cart-item button {
+    background: none;
+    border: none;
+    color: #e67e22;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* BUSCADOR */
+.search-container {
+    margin-bottom: 25px;
+}
+
+.search-box {
+    display: flex;
+    gap: 12px;
+    max-width: 620px;
+    margin: 0 auto;
+}
+
+.search-input {
+    flex: 1;
+    padding: 14px 20px;
+    border: 2px solid #e2e8f0;
+    border-radius: 60px;
+    font-size: 16px;
+    transition: 0.2s;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #e67e22;
+    box-shadow: 0 0 0 3px rgba(230,126,34,0.2);
+}
+
+.search-btn {
+    background: #2c3e2f;
+    color: white;
+    border: none;
+    padding: 0 30px;
+    border-radius: 60px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.search-btn:hover {
+    background: #1a2e1d;
+}
+
+/* HERO */
+.hero {
+    background: linear-gradient(135deg, #2c3e2f, #b85e1a);
+    padding: 45px 30px;
+    border-radius: 48px;
+    margin-bottom: 45px;
+    text-align: center;
+    color: white;
+}
+
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 12px;
+    font-weight: 800;
+}
+
+.hero p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+/* RESULTADOS COUNT */
+.results-count {
+    text-align: center;
+    margin: 10px auto 25px;
+    background: #fef5e7;
+    width: fit-content;
+    padding: 6px 22px;
+    border-radius: 60px;
+    font-weight: 500;
+    color: #2c3e2f;
+}
+.results-count span {
+    font-weight: 800;
+    color: #e67e22;
+}
+
+/* PRODUCTOS */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 32px;
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 30px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    border: 1px solid #e9edf2;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 35px rgba(0,0,0,0.1);
+    border-color: #f39c12;
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 24px;
+    background: #f8f5f0;
+    cursor: pointer;
+}
+
+.price {
+    font-weight: 800;
+    font-size: 22px;
+    margin: 14px 0;
+    color: #e67e22;
+}
+
+.btn {
+    padding: 12px;
+    border: none;
+    border-radius: 60px;
+    background: #2c3e2f;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.2s;
+    font-size: 15px;
+}
+
+.btn:hover {
+    background: #e67e22;
+    transform: scale(0.97);
+}
+
+.no-results {
+    grid-column: 1/-1;
+    text-align: center;
+    padding: 55px;
+    background: #fef5e7;
+    border-radius: 50px;
+    color: #7f5e3a;
+}
+
+footer {
+    text-align: center;
+    padding: 22px;
+    background: #2c3e2f;
+    color: #f5e6d3;
+    border-radius: 40px;
+    margin-top: 50px;
+    font-weight: 500;
+}
+
+/* MODALES */
+#imageModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+#imageModal img {
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 24px;
+}
+.modal-content {
+    position: relative;
+}
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.6);
+    color: white;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    cursor: pointer;
+}
+.prev { left: 20px; }
+.next { right: 20px; }
+#imageModal .close {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    font-size: 34px;
+    color: white;
+    cursor: pointer;
+    background: rgba(0,0,0,0.6);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.indicators {
+    display: flex;
+    gap: 12px;
+    position: absolute;
+    bottom: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.indicators span {
+    width: 12px;
+    height: 12px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 50%;
+    cursor: pointer;
+}
+.indicators span.active {
+    background: white;
+    transform: scale(1.2);
+}
+
+.product-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 1100;
+}
+.product-content {
+    background: white;
+    padding: 28px;
+    border-radius: 44px;
+    width: 90%;
+    max-width: 420px;
+    text-align: center;
+    position: relative;
+}
+.close-product {
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    font-size: 32px;
+    cursor: pointer;
+    color: #64748b;
+}
+@media (max-width: 700px) {
+    .wrapper { padding: 18px; }
+    .hero h1 { font-size: 28px; }
+    .logo { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+<div class="back-button">
+    <a href="javascript:history.back()" class="back-btn">← Volver</a>
+</div>
+
+<div class="wrapper">
+    <header>
+        <div class="logo">🔧 TOOLCENTER · Herramientas Profesionales</div>
+        <div class="cart-box">
+            <div class="cart" onclick="toggleCart()">🛒 <span id="cart-count">0</span> | $<span id="cart-total">0</span></div>
+            <div class="cart-dropdown" id="cart-dropdown">
+                <div id="cart-items"></div>
+                <hr>
+                <strong>Total: $<span id="dropdown-total">0</span></strong>
+                <button class="btn" style="margin-top:12px;" onclick="openCheckout()">💰 Finalizar compra</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="search-container">
+        <div class="search-box">
+            <input type="text" id="searchInput" class="search-input" placeholder="Buscar taladros, limpiadores, compresores, herramientas...">
+            <button class="search-btn" onclick="searchProducts()">🔍 Buscar</button>
+        </div>
+        <div id="resultsCount" class="results-count">🔨 Mostrando <span id="visibleCount">0</span> de <span id="totalCount">0</span> herramientas</div>
+    </div>
+
+    <div class="hero">
+        <h1>🛠️ Herramientas de Calidad 💪</h1>
+        <p>Ferretería, equipos eléctricos, limpieza y accesorios profesionales</p>
+    </div>
+
+    <!-- CATÁLOGO COMPLETO DE HERRAMIENTAS -->
+    <div class="products" id="productos-lista">
+        <!-- Producto 1 -->
+        <div class="card" data-name="Combo cargador batería + inflador de llantas" data-price="185000" data-description="Arrancador de batería para auto + inflador de llantas portátil, ideal para emergencias." data-images="combo-inflador.jpeg">
+            <img src="combo-inflador.jpeg" alt="Combo cargador inflador">
+            <h4>Combo cargador batería + inflador de llantas</h4>
+            <div class="price">$185.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="KIT DE MANICURE 16 PIEZAS" data-price="25000" data-description="Set profesional de manicura 16 piezas, incluye tijeras, limas, pinzas y estuche." data-images="kit-manicure.jpeg">
+            <img src="kit-manicure.jpeg" alt="Kit manicure">
+            <h4>KIT DE MANICURE 16 PIEZAS</h4>
+            <div class="price">$25.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="ENCENDEDOR MECHERO ELECTRONICO DOBLE" data-price="27900" data-description="Encendedor electrónico recargable, doble arco, sin gas, a prueba de viento." data-images="encendedor-electronico.jpeg">
+            <img src="encendedor-electronico.jpeg">
+            <h4>ENCENDEDOR MECHERO ELECTRONICO DOBLE</h4>
+            <div class="price">$27.900</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="KIT PARA DESPINCHAR LLANTAS" data-price="25000" data-description="Kit reparación de pinchazos para neumáticos, incluye mechas y herramientas." data-images="kit-despinchar.jpeg">
+            <img src="kit-despinchar.jpeg" alt="Kit despinchar">
+            <h4>KIT PARA DESPINCHAR LLANTAS</h4>
+            <div class="price">$25.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="Detector de billetes falsos con luz UV" data-price="55000" data-description="Luz de alta precisión para detectar billetes falsos, portátil y fácil de usar." data-images="detector-uv.jpeg">
+            <img src="detector-uv.jpeg" alt="Detector billetes">
+            <h4>Detector de billetes falsos con luz UV</h4>
+            <div class="price">$55.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="LIMPIADOR DE CASCOS REFRESCANTE EN SECO" data-price="36000" data-description="Limpiador en seco para cascos, elimina olores y bacterias, refrescante." data-images="limpiador-cascos.jpeg">
+            <img src="limpiador-cascos.jpeg">
+            <h4>LIMPIADOR DE CASCOS REFRESCANTE EN SECO</h4>
+            <div class="price">$36.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="SOPORTE 2 EN 1 PS5 XBOX SERIES X" data-price="40000" data-description="Soporte multifuncional vertical para consolas PS5 y Xbox Series X." data-images="soporte-consola.jpeg">
+            <img src="soporte-consola.jpeg">
+            <h4>SOPORTE 2 EN 1 PS5 XBOX SERIES X</h4>
+            <div class="price">$40.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="LAMPARA ELECTRICA MATAMOSQUITOS" data-price="35650" data-description="Lámpara eléctrica mata mosquitos, luz UV atrayente, ideal para hogar y taller." data-images="lampara-mata-mosquitos.jpeg">
+            <img src="lampara-mata-mosquitos.jpeg" alt="Lámpara mata mosquitos">
+            <h4>LÁMPARA ELÉCTRICA MATAMOSQUITOS</h4>
+            <div class="price">$35.650</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="CORTADOR MANUAL DE VIDRIO Y CERAMICA" data-price="56000" data-description="Cortador profesional para vidrio y cerámica, precisión y corte limpio." data-images="cortador-vidrio.jpeg">
+            <img src="cortador-vidrio.jpeg">
+            <h4>CORTADOR MANUAL DE VIDRIO Y CERÁMICA</h4>
+            <div class="price">$56.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="COMPRESOR DE AIRE INALAMBRICO" data-price="70500" data-description="Compresor de aire portátil inalámbrico, infla neumáticos, pelotas y colchones." data-images="compresor-inalambrico.jpeg">
+            <img src="compresor-inalambrico.jpeg" alt="Compresor inalámbrico">
+            <h4>COMPRESOR DE AIRE INALÁMBRICO</h4>
+            <div class="price">$70.500</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="DRONE 998 PRO DOBLE CAMARA" data-price="125000" data-description="Drone con doble cámara, vuelo estable, ideal para fotografía aérea y vigilancia." data-images="drone-998.jpeg">
+            <img src="drone-998.jpeg" alt="Drone">
+            <h4>DRONE 998 PRO DOBLE CÁMARA</h4>
+            <div class="price">$125.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="GRAMERA DIGITAL 500GR" data-price="17050" data-description="Báscula digital de precisión 500g, medición en gramos/onzas, pantalla LCD." data-images="gramera-digital.jpeg">
+            <img src="gramera-digital.jpeg">
+            <h4>GRAMERA DIGITAL 500GR</h4>
+            <div class="price">$17.050</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="CANDADO DISCO MOTO ALARMA PESADO LK603" data-price="45000" data-description="Candado de disco para moto con alarma sonora, acero endurecido, antirrobo." data-images="candado-moto.jpeg">
+            <img src="candado-moto.jpeg" alt="Candado moto">
+            <h4>CANDADO DISCO MOTO ALARMA PESADO LK603</h4>
+            <div class="price">$45.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="SELLADOR DE BOLSAS DIGITAL" data-price="50000" data-description="Selladora de bolsas digital, termo-selladora para conservar alimentos al vacío." data-images="sellador-bolsas.jpeg">
+            <img src="sellador-bolsas.jpeg">
+            <h4>SELLADOR DE BOLSAS DIGITAL</h4>
+            <div class="price">$50.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="INTERCOMUNICADOR Q58-MAX MOTO CASCO" data-price="95000" data-description="Características:
+
+- Bluetooth 5.3
+- Radio FM integrada
+- Pantalla LCD
+- Linterna LED incorporada
+- Batería recargable de alta capacidad
+- Luces LED multicolor
+- Soporta tarjeta TF." data-images="intercom-q58.jpeg">
+            <img src="intercom-q58.jpeg">
+            <h4>INTERCOMUNICADOR Q58-MAX MOTO CASCO</h4>
+            <div class="price">$95.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="CONTADORA DE BILLETES PROFESIONAL" data-price="345000" data-description="Contadora de billetes profesional, detección de falsos, conteo rápido y preciso." data-images="contadora-billetes.jpeg">
+            <img src="contadora-billetes.jpeg">
+            <h4>CONTADORA DE BILLETES PROFESIONAL</h4>
+            <div class="price">$345.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="LIMPIAVIDRIOS MAGNETICO" data-price="22000" data-description="Limpiador magnético para vidrios de doble cara, ideal para ventanas inaccesibles." data-images="limpiavidrios.jpeg">
+            <img src="limpiavidrios.jpeg">
+            <h4>LIMPIAVIDRIOS MAGNÉTICO</h4>
+            <div class="price">$22.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        
+        <div class="card" data-name="KIT ESTABILIZADOR CELULAR TRIPODE" data-price="35000" data-description="Kit estabilizador para celular con trípode ajustable, ideal para grabaciones." data-images="estabilizador.jpeg">
+            <img src="estabilizador.jpeg">
+            <h4>KIT ESTABILIZADOR CELULAR TRIPODE</h4>
+            <div class="price">$35.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="LINTERNA EMERGENCIA SOLAR Y DINAMO" data-price="26000" data-description="Linterna LED portátil recargable con panel solar y dinamo, emergencia y camping." data-images="linterna-solar.jpeg">
+            <img src="linterna-solar.jpeg" alt="Linterna solar">
+            <h4>LINTERNA EMERGENCIA SOLAR Y DÍNAMO</h4>
+            <div class="price">$26.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="VENTILADOR SOLAR DE PINZA PARA SOMBRERO" data-price="24000" data-description="Ventilador solar portátil con pinza para sombrero, recargable USB, doble velocidad." data-images="ventiladorsolar.jpeg">
+            <img src="ventiladorsolar.jpeg">
+            <h4>VENTILADOR SOLAR DE PINZA PARA SOMBRERO</h4>
+            <div class="price">$24.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="CAMARA DVR PARA CARRO" data-price="86000" data-description="Dashcam para auto, grabación loop HD, visión nocturna, detección de movimiento." data-images="camara-dvr.jpeg">
+            <img src=camara-dvr.jpeg>
+            <h4>CÁMARA DVR PARA CARRO</h4>
+            <div class="price">$86.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="Cepillo de limpieza 9 en 1" data-price="75700" data-description="Cepillo eléctrico giratorio 9 en 1, multifuncional, ideal para limpieza profunda." data-images="cepillo-limpieza1.jpeg">
+            <img src="cepillo-limpieza1.jpeg" alt="Cepillo limpieza">
+            <h4>Cepillo de limpieza 9 en 1</h4>
+            <div class="price">$75.700</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="LINTERNA CON TASER Y LASER" data-price="35200" data-description="Linterna táctica con taser eléctrico y puntero láser, defensa personal y seguridad." data-images="linterna-taser.jpeg">
+            <img src="linterna-taser.jpeg" alt="Linterna taser">
+            <h4>LINTERNA CON TÁSER Y LÁSER</h4>
+            <div class="price">$35.200</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="TENDEDERO DE ROPA" data-price="38000" data-description="Tendedero retráctil de pared, ahorra espacio, capacidad hasta 10kg." data-images="tendedero.jpeg">
+            <img src="tendedero.jpeg">
+            <h4>TENDEDERO DE ROPA</h4>
+            <div class="price">$38.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+    
+        <div class="card" data-name="CINTA LED 5 METROS + CONTROL" data-price="25000" data-description="Cinta LED RGB de 5 metros con control remoto, 16 colores, efecto música." data-images="cinta-led.jpeg">
+            <img src="cinta-led.jpeg">
+            <h4>CINTA LED 5 METROS + CONTROL</h4>
+            <div class="price">$25.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+       
+        <div class="card" data-name="SECADOR DE ROPA PORTATIL AM-400" data-price="125500" data-description="Secador de ropa portátil eléctrico, 400W, ideal para espacios pequeños." data-images="secador-ropa.jpeg">
+            <img src="secador-ropa.jpeg" alt="Secador ropa">
+            <h4>SECADOR DE ROPA PORTÁTIL AM-400</h4>
+            <div class="price">$125.500</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+
+        <div class="card" data-name="SOPLADOR ASPIRADORA INALÁMBRICA" data-price="120000" data-description="Soplador aspiradora inalámbrica, 2 en 1, potente para jardín y taller." data-images="sopladora.jpeg">
+            <img src="sopladora.jpeg">
+            <h4>SOPLADOR ASPIRADORA INALÁMBRICA</h4>
+            <div class="price">$120.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="TALADRO INALAMBRICO 2 BATERIAS" data-price="175500" data-description="Taladro inalámbrico con 2 baterías, maletín incluido, velocidad variable." data-images="taladro-inalambrico.jpeg">
+            <img src="taladro-inalambrico.jpeg" alt="Taladro inalámbrico">
+            <h4>TALADRO INALÁMBRICO 2 BATERÍAS</h4>
+            <div class="price">$175.500</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="LUBRICANTE DE GUAYAS - PYSTA 120ML" data-price="48000" data-description="Lubricante para guayas, cables y mecanismos, penetración profunda." data-images="lubricante-guayas.jpeg">
+            <img src="lubricante-guayas.jpeg" alt="Lubricante guayas">
+            <h4>LUBRICANTE DE GUAYAS - PYSTA 120ML</h4>
+            <div class="price">$48.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="DESTORNILLADOR INALAMBRICO CON ACCESORIOS" data-price="57000" data-description="Destornillador inalámbrico con accesorios intercambiables, recargable, práctico." data-images="destornillador-inal.jpeg">
+            <img src="destornillador-inal.jpeg" alt="Destornillador inalámbrico">
+            <h4>DESTORNILLADOR INALÁMBRICO CON ACCESORIOS</h4>
+            <div class="price">$57.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="PISTOLA PARA PINTAR INALÁMBRICA" data-price="150000" data-description="Pistola para pintar inalámbrica, compresor incluido, acabado profesional." data-images="pistola-pintar.jpeg">
+            <img src="pistola-pintar.jpeg" alt="Pistola pintar">
+            <h4>PISTOLA PARA PINTAR INALÁMBRICA</h4>
+            <div class="price">$150.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="GUADAÑA PODADORA CORTADORA CESped" data-price="120000" data-description="Guadaña podadora para césped, 1 bateria, ideal para jardinería." data-images="guadaña.jpeg">
+            <img src="guadaña.jpeg">
+            <h4>GUADAÑA PODADORA CORTADORA CÉSPED</h4>
+            <div class="price">$120.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+
+        <div class="card" data-name="LLAVE MULTIFUNCIONAL 48 EN 1" data-price="25000" data-description="Llave multiusos 48 funciones, compacta, ideal para emergencias y viajes." data-images="llave-48en1.jpeg">
+            <img src="llave-48en1.jpeg" alt="Llave multifuncional">
+            <h4>LLAVE MULTIFUNCIONAL 48 EN 1</h4>
+            <div class="price">$25.000</div>
+            <button class="btn add">Agregar al carrito</button>
+        </div>
+    </div>
+
+    <footer>
+        🔧 ToolCenter — Calidad y resistencia para tus proyectos 🔨
+    </footer>
+</div>
+
+<!-- MODALES -->
+<div class="product-modal" id="productModal">
+    <div class="product-content">
+        <span class="close-product">&times;</span>
+        <img id="modal-image" src="" alt="Producto">
+        <h2 id="modal-name"></h2>
+        <p id="modal-description"></p>
+        <p>$<span id="modal-price"></span></p>
+        <button id="modal-add" class="btn">➕ Agregar al carrito</button>
+    </div>
+</div>
+
+<div id="imageModal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <span class="prev">&#10094;</span>
+        <img id="modalImg" src="">
+        <span class="next">&#10095;</span>
+        <div class="indicators"></div>
+    </div>
+</div>
+
+<script>
+let cart = [];
+
+function updateCart() {
+    let count = 0, total = 0, html = "";
+    cart.forEach((item, idx) => {
+        count += item.qty;
+        total += item.price * item.qty;
+        html += `<div class="cart-item">${item.name} x${item.qty} <button onclick="removeItem(${idx})">🗑️</button></div>`;
+    });
+    document.getElementById("cart-count").innerText = count;
+    document.getElementById("cart-total").innerText = total.toLocaleString();
+    document.getElementById("dropdown-total").innerText = total.toLocaleString();
+    document.getElementById("cart-items").innerHTML = html || "📭 Carrito vacío";
+    localStorage.setItem("toolCart", JSON.stringify(cart));
+}
+
+function addToCart(name, price) {
+    let exist = cart.find(i => i.name === name);
+    if (exist) exist.qty++;
+    else cart.push({ name, price, qty: 1 });
+    updateCart();
+    toastMessage(`🔧 ${name} agregado`);
+}
+
+function toastMessage(msg) {
+    let toast = document.createElement("div");
+    toast.innerText = msg;
+    toast.style.position = "fixed";
+    toast.style.bottom = "25px";
+    toast.style.left = "50%";
+    toast.style.transform = "translateX(-50%)";
+    toast.style.backgroundColor = "#2c3e2f";
+    toast.style.color = "white";
+    toast.style.padding = "12px 28px";
+    toast.style.borderRadius = "60px";
+    toast.style.zIndex = "9999";
+    toast.style.fontWeight = "600";
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 1800);
+}
+
+function removeItem(idx) { cart.splice(idx, 1); updateCart(); }
+window.removeItem = removeItem;
+function toggleCart() { let d = document.getElementById("cart-dropdown"); d.style.display = d.style.display === "block" ? "none" : "block"; }
+window.toggleCart = toggleCart;
+
+function openCheckout() {
+    if (cart.length === 0) return alert("🛠️ Agrega herramientas al carrito");
+    let numero = "573213850020";
+    let mensaje = "🔨 *NUEVO PEDIDO TOOLCENTER*\n\n";
+    let total = 0;
+    cart.forEach(item => { mensaje += `• ${item.name} x${item.qty} = $${(item.price * item.qty).toLocaleString()}\n`; total += item.price * item.qty; });
+    mensaje += `\n💰 *Total:* $${total.toLocaleString()}\n👤 Nombre:\n📍 Dirección:\n📞 Teléfono:`;
+    window.open(`https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`, "_blank");
+}
+window.openCheckout = openCheckout;
+
+document.querySelectorAll(".add").forEach(btn => btn.addEventListener("click", (e) => { e.stopPropagation(); let card = e.target.closest(".card"); addToCart(card.dataset.name, parseInt(card.dataset.price)); }));
+
+function searchProducts() {
+    let term = document.getElementById("searchInput").value.toLowerCase();
+    let cards = document.querySelectorAll(".card");
+    let visible = 0;
+    cards.forEach(c => { let match = term === "" || c.dataset.name.toLowerCase().includes(term); c.style.display = match ? "block" : "none"; if (match) visible++; });
+    document.getElementById("visibleCount").innerText = visible;
+    document.getElementById("totalCount").innerText = cards.length;
+}
+document.getElementById("searchInput").addEventListener("input", searchProducts);
+
+function initProductModal() {
+    const modal = document.getElementById("productModal");
+    let selectedCard = null;
+    document.querySelectorAll(".card").forEach(card => {
+        card.addEventListener("click", (e) => {
+            if (e.target.classList.contains("add") || e.target.tagName === "IMG") return;
+            selectedCard = card;
+            document.getElementById("modal-image").src = card.querySelector("img").src;
+            document.getElementById("modal-name").innerText = card.dataset.name;
+            document.getElementById("modal-description").innerText = card.dataset.description || "Herramienta profesional de alta calidad";
+            document.getElementById("modal-price").innerText = parseInt(card.dataset.price).toLocaleString();
+            modal.style.display = "flex";
+        });
+    });
+    document.getElementById("modal-add").onclick = () => { if(selectedCard) { addToCart(selectedCard.dataset.name, parseInt(selectedCard.dataset.price)); modal.style.display = "none"; } };
+    document.querySelector(".close-product").onclick = () => modal.style.display = "none";
+    modal.onclick = (e) => { if(e.target === modal) modal.style.display = "none"; };
+}
+
+function initImageModal() {
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImg");
+    const closeBtn = modal.querySelector(".close");
+    document.querySelectorAll(".card img").forEach(img => {
+        img.addEventListener("click", (e) => { e.stopPropagation(); modalImg.src = img.src; modal.style.display = "flex"; });
+    });
+    closeBtn.onclick = () => modal.style.display = "none";
+    modal.onclick = (e) => { if(e.target === modal) modal.style.display = "none"; };
+}
+
+if(localStorage.getItem("toolCart")) cart = JSON.parse(localStorage.getItem("toolCart"));
+updateCart();
+initProductModal();
+initImageModal();
+searchProducts();
+
+document.addEventListener("click", function(e) {
+    let cartBox = document.querySelector(".cart-box");
+    let dropdown = document.getElementById("cart-dropdown");
+    if(cartBox && !cartBox.contains(e.target) && dropdown.style.display === "block") dropdown.style.display = "none";
+});
+</script>
+</body>
+</html>
