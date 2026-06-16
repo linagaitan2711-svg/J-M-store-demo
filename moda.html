@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>J&M STORE - Moda, Belleza y Accesorios</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #f6d5df;
+}
+
+/* BOTÓN VOLVER */
+.back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.back-btn {
+    background: #e63973;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(230, 57, 115, 0.3);
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: #c2185b;
+    transform: translateX(-5px);
+}
+
+/* CONTENEDOR PRINCIPAL */
+.wrapper {
+    width: 95%;
+    max-width: 1400px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+/* HEADER */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 700;
+    color: #e63973;
+}
+
+.cart-box {
+    position: relative;
+}
+
+.cart {
+    background: #e63973;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.cart-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 45px;
+    background: #fff;
+    width: 300px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    padding: 15px;
+    z-index: 100;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+.cart-item button {
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+/* BUSCADOR */
+.search-container {
+    grid-column: 1/-1;
+    margin-bottom: 20px;
+}
+
+.search-box {
+    display: flex;
+    gap: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-input {
+    flex: 1;
+    padding: 15px 20px;
+    border: 2px solid #f0f0f0;
+    border-radius: 30px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #e63973;
+}
+
+.search-btn {
+    background: #e63973;
+    color: white;
+    border: none;
+    padding: 0 30px;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+.search-btn:hover {
+    background: #c2185b;
+}
+
+/* HERO */
+.hero {
+    background: linear-gradient(135deg, #ff8fab, #ff4d6d);
+    padding: 40px;
+    border-radius: 20px;
+    color: #fff;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+/* SECCIÓN */
+.section {
+    margin-bottom: 50px;
+}
+
+.section h2 {
+    margin-bottom: 20px;
+    color: #e63973;
+    font-size: 28px;
+    border-left: 5px solid #e63973;
+    padding-left: 15px;
+}
+
+/* CONTADOR DE RESULTADOS */
+.results-count {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #666;
+    font-size: 16px;
+}
+
+.results-count span {
+    font-weight: 600;
+    color: #e63973;
+}
+
+/* PRODUCTOS - OPTIMIZADO */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: #fafafa;
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(230, 57, 115, 0.15);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+    content-visibility: auto;
+    contain-intrinsic-size: 200px;
+}
+
+.price {
+    font-weight: 700;
+    font-size: 18px;
+    margin: 10px 0;
+    color: #e63973;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background: #e63973;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+    width: 100%;
+}
+
+.btn:hover {
+    background: #c2185b;
+}
+
+/* MENSAJE SIN RESULTADOS */
+.no-results {
+    grid-column: 1/-1;
+    text-align: center;
+    padding: 50px;
+    background: #f8f8f8;
+    border-radius: 20px;
+    color: #666;
+}
+
+.no-results i {
+    font-size: 50px;
+    color: #e63973;
+    margin-bottom: 20px;
+}
+
+.no-results h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #ff8fab;
+    color: #fff;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .wrapper { padding: 20px; }
+    .hero h1 { font-size: 28px; }
+    .products { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .search-box { flex-direction: column; }
+    .search-btn { padding: 15px; }
+}
+
+@media (max-width: 480px) {
+    header { flex-direction: column; gap: 15px; }
+    .cart-box { width: 100%; }
+    .cart { width: 100%; text-align: center; }
+    .hero { padding: 30px 20px; }
+    .hero h1 { font-size: 24px; }
+    .back-btn { padding: 8px 15px; font-size: 12px; }
+}
+
+/* MODAL DE IMAGEN */
+#imageModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#modalImg {
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 10px;
+}
+
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 22px;
+    width: 55px;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(6px);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+#imageModal:hover .prev,
+#imageModal:hover .next {
+    opacity: 1;
+}
+
+.prev { left: 60px; }
+.next { right: 60px; }
+
+.prev:hover, .next:hover {
+    background: white;
+    color: black;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.close-modal {
+    position: absolute;
+    top: 40px;
+    right: 60px;
+    font-size: 22px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+    background: white;
+    color: black;
+    transform: scale(1.1);
+}
+
+.indicators {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.indicators span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.indicators span.active {
+    background: white;
+    transform: scale(1.2);
+}
+
+/* MODAL DE PRODUCTO */
+.product-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.product-content {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+}
+
+.product-content img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.close-product {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+}
+
+.close-product:hover {
+    color: #e63973;
+}
+</style>
+</head>
+<body>
+
+<div class="back-button">
+    <a href="javascript:history.back()" class="back-btn">← Atrás</a>
+</div>
+
+<div class="wrapper">
+    <header>
+        <div class="logo">J&M STORE</div>
+        <div class="cart-box">
+            <div class="cart" id="cartBtn">🛒 <span id="cart-count">0</span> | $<span id="cart-total">0</span></div>
+            <div class="cart-dropdown" id="cart-dropdown">
+                <div id="cart-items"></div>
+                <hr>
+                <strong>Total: $<span id="dropdown-total">0</span></strong>
+                <button class="btn" style="width:100%;margin-top:10px;" id="checkoutBtn">Finalizar compra</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="search-container">
+        <div class="search-box">
+            <input type="text" id="searchInput" class="search-input" placeholder="Buscar productos de moda y belleza..." autocomplete="off">
+            <button class="search-btn" id="searchBtn">🔍 Buscar</button>
+        </div>
+        <div id="resultsCount" class="results-count">
+            Mostrando <span id="visibleCount">0</span> de <span id="totalCount">0</span> productos
+        </div>
+    </div>
+
+    <div class="hero">
+        <h1>❤️ Cuidado, Belleza y Accesorios</h1>
+        <p>Ropa, cosméticos, accesorios y todo para tu estilo personal</p>
+    </div>
+
+    <div id="product-container">
+        <div class="section">
+            <h2>Todos los productos de Moda y Belleza</h2>
+            <div class="products" id="productos-moda"></div>
+        </div>
+    </div>
+
+    <footer>© 2026 J&M STORE - Todos los derechos reservados</footer>
+</div>
+
+<!-- MODALES -->
+<div class="product-modal" id="productModal">
+    <div class="product-content">
+        <span class="close-product">&times;</span>
+        <img id="modal-image" src="" alt="Producto">
+        <h2 id="modal-name"></h2>
+        <p id="modal-description"></p>
+        <p>$<span id="modal-price"></span></p>
+        <button id="modal-add" class="btn">Agregar al carrito</button>
+    </div>
+</div>
+
+<div id="imageModal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <span class="prev">&#10094;</span>
+        <img id="modalImg" src="" alt="Imagen ampliada">
+        <span class="next">&#10095;</span>
+        <div class="indicators"></div>
+    </div>
+</div>
+
+<script>
+// ==================== TODOS LOS PRODUCTOS (52 productos) ====================
+const productsData = [
+    { name: "Termo motivacional trio", price: 29500, description: "Set de 3 termos motivacionales con diferentes capacidades", image: "termomotivacional.jpeg", images: ["termomotivacional.jpeg"] },
+    { name: "Bolsa termica pequeña", price: 35000, description: "Bolsa térmica pequeña ideal para llevar alimentos y bebidas", image: "bolsatermicapequeña.jpeg", images: ["bolsatermicapequeña.jpeg"] },
+    { name: "Mochila Bolso Maleta", price: 62000, description: "Mochila convertible en bolso maleta. Color Negro o Café. Versátil y espaciosa, ideal para trabajo o viaje.", image: "mochila.jpeg", images: ["mochila.jpeg"] },
+    { name: "Bolso Morral Fashion Seguridad", price: 38750, description: "Bolso morral fashion con clave de seguridad. Negro / Azul con Café. Diseño moderno con compartimento seguro.", image: "morral-fashion.jpeg", images: ["morral-fashion.jpeg"] },
+    { name: "Base En Crema Moisture", price: 37200, description: "Base en crema Moisture. Hidratante y cobertura natural. Acabado luminoso para piel radiante.", image: "base-moisture.jpeg", images: ["base-moisture.jpeg"] },
+    { name: "Depilador De Cejas Flawless", price: 15500, description: "Depilador de cejas Flawless. Preciso y sin dolor. Baterías incluidas, ideal para cejas perfectas.", image: "depilador-cejas.jpeg", images: ["depilador-cejas.jpeg"] },
+    { name: "Combo Plancha + Secador", price: 85000, description: "Combo de plancha y secador de cabello. Potente y fácil de usar, para un look perfecto en casa.", image: "combo-plancha-secador.jpeg", images: ["combo-plancha-secador.jpeg"] },
+    { name: "Lámpara UV Uñas 72W Inalámbrica", price: 170000, description: "Lámpara UV para uñas de 72W inalámbrica. Secado rápido y profesional para gel y acrílico.", image: "lampara-uv.jpeg", images: ["lampara-uv.jpeg"] },
+    { name: "Máquina Afeitadora 3 Cabezales", price: 93000, description: "Máquina afeitadora eléctrica con 3 cabezales. Afeitado suave y profundo, recargable e inalámbrica.", image: "afeitadora-3c.jpeg", images: ["afeitadora-3c.jpeg"] },
+    { name: "Masajeador Cabeza Infrarrojo", price: 80500, description: "Masajeador eléctrico de cabeza con infrarrojo. Alivia la fatiga, múltiples modos, batería recargable.", image: "masajeador.jpeg", images: ["masajeador.jpeg"] },
+    { name: "Toalla secado cabello microfibra", price: 22000, description: "Toalla de microfibra súper absorbente para cabello. Suave y delicada, ideal para secado rápido sin maltratar.", image: "toalla.jpeg", images: ["toalla.jpeg"] },
+    { name: "Glucometro medidor glucosa", price: 60800, description: "Medidor de glucosa con 50 tirillas y lancetas. Preciso y fácil de usar.", image: "glucometro.jpeg", images: ["glucometro.jpeg"] },
+    { name: "Tabla push up para ejercicios", price: 50000, description: "Tabla para ejercicios de push up. Ideal para entrenamiento en casa.", image: "tablapushup.jpeg", images: ["tablapushup.jpeg"] },
+    { name: "Copa menstrual", price: 25000, description: "Copa menstrual reutilizable. Ecológica y cómoda.", image: "copamenstrual.jpeg", images: ["copamenstrual.jpeg"] },
+    { name: "Bandas de resistencia", price: 25000, description: "Bandas de resistencia de pedal elástico. Perfectas para ejercicio.", image: "banda.jpeg", images: ["banda.jpeg"] },
+    { name: "Termo stanley 1.9 litros", price: 89500, description: "Termo Stanley 1.9 litros 64 onzas con vaso. Mantiene temperatura por horas.", image: "termo.jpeg", images: ["termo.jpeg"] },
+    { name: "Antibruxismo protector bucal", price: 15000, description: "Protector bucal anti-ronquidos y antibruxismo.", image: "antibruxismo.jpeg", images: ["antibruxismo.jpeg"] },
+    { name: "Mini masajeador facial", price: 42600, description: "Mini masajeador facial de alta frecuencia. Ideal para cuidado facial.", image: "Minimasajeadorfacial.jpeg", images: ["Minimasajeadorfacial.jpeg"] },
+    { name: "Muñequera ajustable cooper", price: 25000, description: "Muñequera ajustable cooper LC-004. Soporte para muñeca.", image: "Muñequera.jpeg", images: ["Muñequera.jpeg"] },
+    { name: "Set bandas x5 ejercicio", price: 25000, description: "Set de bandas de resistencia x5 para ejercicio.", image: "bandaderesistencia.jpeg", images: ["bandaderesistencia.jpeg"] },
+    { name: "Cepillo de dientes electrico X3", price: 20150, description: "Cepillo de dientes eléctrico X3. Limpieza profunda.", image: "CepillodedienteselectricoX3.jpeg", images: ["CepillodedienteselectricoX3.jpeg"] },
+    { name: "Irrigador bucal limpieza oral", price: 25000, description: "Irrigador bucal de limpieza oral. Ideal para higiene dental completa.", image: "Irrigadorbucaldelimpiezaoral.jpeg", images: ["Irrigadorbucaldelimpiezaoral.jpeg"] },
+    { name: "Ventilador personal recargable", price: 24000, description: "Ventilador personal recargable portátil. Ideal para calor.", image: "Ventiladorpersonalrecargable.jpeg", images: ["Ventiladorpersonalrecargable.jpeg"] },
+    { name: "Bolsa termica de 2 litros", price: 35000, description: "Bolsa térmica de 2 litros. Mantiene temperatura.", image: "Bolsatermicade2litros.jpeg", images: ["Bolsatermicade2litros.jpeg"] },
+    { name: "Set de maquillaje Niñas", price: 67200, description: "Set de maquillaje para niñas, seguro y divertido. Ideal para regalo.", image: "setmakeupniñas.jpeg", images: ["setmakeupniñas.jpeg"] },
+    { name: "Afeitadora Oidos y Nariz Trimmer", price: 45000, description: "Afeitadora para oídos y nariz, trimmer 2 en 1.", image: "afeitadoraoidos.jpeg", images: ["afeitadoraoidos.jpeg"] },
+    { name: "Limpiador de Brochas Eléctrico", price: 32000, description: "Limpiador de brochas eléctrico LS-116.", image: "limpiadorbrochas.jpeg", images: ["limpiadorbrochas.jpeg"] },
+    { name: "Plancha de Cabello Nano Titanium", price: 54000, description: "Plancha de cabello con tecnología Nano Titanium.", image: "planchananotitanium.jpeg", images: ["planchananotitanium.jpeg"] },
+    { name: "Barra Ejercitadora Flexible", price: 84500, description: "Barra flexible para ejercicios y entrenamiento.", image: "barraejercitadora.jpeg", images: ["barraejercitadora.jpeg"] },
+    { name: "Plataforma Inteligente con Vib", price: 355000, description: "Plataforma inteligente con vibración para ejercicios.", image: "plataformainteligente.jpeg", images: ["plataformainteligente.jpeg"] },
+
+    { name: "Termo Vacum Con Pocillos", price: 24800, description: "Termo al vacío con pocillos incluidos.", image: "termovacum.jpeg", images: ["termovacum.jpeg"] },
+    { name: "Aceite Post-Afeitador Ácido Hia", price: 37500, description: "Aceite post-afeitador con ácido hialurónico.", image: "aceitepostafeitador.jpeg", images: ["aceitepostafeitador.jpeg"] },
+    { name: "Taza Mezcladora Eléctrica", price: 30500, description: "Taza mezcladora eléctrica recargable.", image: "tazamezcladora.jpeg", images: ["tazamezcladora.jpeg"] },
+    { name: "Patillera Afeitadora Geemy", price: 45000, description: "Afeitadora eléctrica 3 en 1 para hombre, modelo Geemy.", image: "patilleraafeitadora.jpeg", images: ["patilleraafeitadora.jpeg"] },
+    { name: "Ducha Portatil", price: 42000, description: "Ducha portátil con batería recargable.", image: "duchaportatil.jpeg", images: ["duchaportatil.jpeg"] },
+    { name: "Rodillo Limpiador de Pelos", price: 15000, description: "Quitapelusas portátil reutilizable.", image: "rodillopelos.jpeg", images: ["rodillopelos.jpeg"] },
+    { name: "Cepillo Secador One Step", price: 50000, description: "Cepillo secador de pelo one step.", image: "cepillosecador.jpeg", images: ["cepillosecador.jpeg"] },
+    { name: "Cepillo Alisador", price: 38500, description: "Cepillo alisador de cabello. Transforma tu cabello fácilmente.", image: "cepilloalisador.jpeg", images: ["cepilloalisador.jpeg"] },
+    { name: "Masajeador Ajustable Hombros", price: 145000, description: "Masajeador ajustable para hombros.", image: "masajeadorhombros.jpeg", images: ["masajeadorhombros.jpeg"] },
+    { name: "Pasta Dental Blanqueadora", price: 27200, description: "Pasta dental blanqueadora Mineral Teeth Restoration.", image: "pastadental.jpeg", images: ["pastadental.jpeg"] },
+    { name: "Ventilador Solar de Pinza", price: 24000, description: "Ventilador solar de pinza para sombrero.", image: "ventiladorsolar.jpeg", images: ["ventiladorsolar.jpeg"] },
+    { name: "Olla de Cera plegable", price: 35500, description: "Olla plegable para cera.", image: "ollacera.jpeg", images: ["ollacera.jpeg"] },
+    { name: "Media de Compresión", price: 23250, description: "Media de compresión.", image: "mediacompresion.jpeg", images: ["mediacompresion.jpeg"] },
+    { name: "Mini Lavadora de Brochas", price: 28700, description: "Mini lavadora de brochas y esponjas de maquillaje.", image: "minilavadorabrochas.jpeg", images: ["minilavadorabrochas.jpeg"] },
+    { name: "Plancha Cabello Aguacate 3D", price: 55000, description: "Plancha de cabello con aceite de aguacate 3D.", image: "planchaaguacate.jpeg", images: ["planchaaguacate.jpeg"] },
+    { name: "Masajeador Micro Facial", price: 15000, description: "Masajeador micro facial portátil.", image: "masajeadormicrofacial.jpeg", images: ["masajeadormicrofacial.jpeg"] },
+    
+];
+
+// ==================== VARIABLES GLOBALES ====================
+let cart = [];
+let currentImagesList = [];
+let currentImageIndex = 0;
+let currentProduct = null;
+
+// ==================== FUNCIONES DEL CARRITO ====================
+function updateCart() {
+    let cartCount = 0;
+    let cartTotal = 0;
+    let cartItemsHTML = "";
+
+    cart.forEach((item, index) => {
+        cartCount += item.qty;
+        cartTotal += item.price * item.qty;
+        cartItemsHTML += `<div class="cart-item">${item.name} x${item.qty} <button class="remove-item" data-index="${index}">❌</button></div>`;
+    });
+
+    document.getElementById("cart-count").innerText = cartCount;
+    document.getElementById("cart-total").innerText = cartTotal.toLocaleString();
+    document.getElementById("dropdown-total").innerText = cartTotal.toLocaleString();
+    document.getElementById("cart-items").innerHTML = cartItemsHTML || "Carrito vacío";
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+function addToCart(name, price) {
+    let existing = cart.find(item => item.name === name);
+    if (existing) {
+        existing.qty++;
+    } else {
+        cart.push({ name, price, qty: 1 });
+    }
+    updateCart();
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCart();
+}
+
+// ==================== RENDERIZADO DE PRODUCTOS ====================
+function renderProducts(productsToShow = productsData) {
+    const container = document.getElementById("productos-moda");
+    container.innerHTML = productsToShow.map(product => `
+        <div class="card" data-name="${product.name.replace(/"/g, '&quot;')}" data-price="${product.price}" data-description="${product.description.replace(/"/g, '&quot;')}" data-images='${JSON.stringify(product.images)}'>
+            <img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x200?text=${encodeURIComponent(product.name)}'">
+            <h4>${product.name}</h4>
+            <div class="price">$${product.price.toLocaleString()}</div>
+            <button class="btn add-to-cart">Agregar al carrito</button>
+        </div>
+    `).join("");
+    
+    document.getElementById("totalCount").innerText = productsToShow.length;
+    document.getElementById("visibleCount").innerText = productsToShow.length;
+}
+
+// ==================== BÚSQUEDA ====================
+function searchProducts() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+    const filtered = productsData.filter(product => product.name.toLowerCase().includes(searchTerm));
+    
+    renderProducts(filtered);
+    
+    const container = document.getElementById("productos-moda");
+    let noResultsMsg = document.getElementById('noResultsMsg');
+    
+    if (filtered.length === 0 && searchTerm !== '') {
+        if (!noResultsMsg) {
+            noResultsMsg = document.createElement('div');
+            noResultsMsg.id = 'noResultsMsg';
+            noResultsMsg.className = 'no-results';
+            noResultsMsg.innerHTML = `<i class="fas fa-search"></i><h3>No se encontraron productos</h3><p>No hay productos que coincidan con "${searchTerm}"</p>`;
+            container.appendChild(noResultsMsg);
+        }
+    } else if (noResultsMsg) {
+        noResultsMsg.remove();
+    }
+}
+
+// ==================== MODALES ====================
+function openProductModal(card) {
+    currentProduct = {
+        name: card.dataset.name,
+        price: parseInt(card.dataset.price),
+        description: card.dataset.description,
+        image: card.querySelector("img").src,
+        images: JSON.parse(card.dataset.images || '[]')
+    };
+    
+    document.getElementById("modal-image").src = currentProduct.image;
+    document.getElementById("modal-name").innerText = currentProduct.name;
+    document.getElementById("modal-description").innerText = currentProduct.description;
+    document.getElementById("modal-price").innerText = currentProduct.price.toLocaleString();
+    document.getElementById("productModal").style.display = "flex";
+}
+
+function openImageModal(images, startIndex = 0) {
+    if (!images || images.length === 0) return;
+    currentImagesList = images;
+    currentImageIndex = startIndex;
+    
+    const modalImg = document.getElementById("modalImg");
+    modalImg.src = currentImagesList[currentImageIndex];
+    
+    updateIndicators();
+    document.getElementById("imageModal").style.display = "flex";
+}
+
+function updateIndicators() {
+    const indicatorsContainer = document.querySelector(".indicators");
+    indicatorsContainer.innerHTML = currentImagesList.map((_, idx) => 
+        `<span class="${idx === currentImageIndex ? 'active' : ''}" data-index="${idx}"></span>`
+    ).join("");
+    
+    document.querySelectorAll(".indicators span").forEach(dot => {
+        dot.addEventListener("click", (e) => {
+            currentImageIndex = parseInt(e.target.dataset.index);
+            document.getElementById("modalImg").src = currentImagesList[currentImageIndex];
+            updateIndicators();
+        });
+    });
+}
+
+function nextImage() {
+    currentImageIndex = (currentImageIndex + 1) % currentImagesList.length;
+    document.getElementById("modalImg").src = currentImagesList[currentImageIndex];
+    updateIndicators();
+}
+
+function prevImage() {
+    currentImageIndex = (currentImageIndex - 1 + currentImagesList.length) % currentImagesList.length;
+    document.getElementById("modalImg").src = currentImagesList[currentImageIndex];
+    updateIndicators();
+}
+
+// ==================== EVENT DELEGATION (SIN LAG) ====================
+document.addEventListener("DOMContentLoaded", function() {
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) cart = JSON.parse(savedCart);
+    
+    renderProducts();
+    updateCart();
+    
+    // Event delegation
+    document.body.addEventListener("click", (e) => {
+        if (e.target.classList.contains("add-to-cart")) {
+            e.stopPropagation();
+            const card = e.target.closest(".card");
+            addToCart(card.dataset.name, parseInt(card.dataset.price));
+            return;
+        }
+        
+        if (e.target.closest(".card") && !e.target.classList.contains("add-to-cart") && e.target.tagName !== "IMG") {
+            const card = e.target.closest(".card");
+            openProductModal(card);
+            return;
+        }
+        
+        if (e.target.tagName === "IMG" && e.target.closest(".card")) {
+            e.stopPropagation();
+            const card = e.target.closest(".card");
+            const images = JSON.parse(card.dataset.images || '[]');
+            const currentImgSrc = e.target.src;
+            const startIndex = images.findIndex(img => currentImgSrc.includes(img)) || 0;
+            openImageModal(images.length ? images : [currentImgSrc], startIndex >= 0 ? startIndex : 0);
+            return;
+        }
+        
+        if (e.target.classList.contains("remove-item")) {
+            removeFromCart(parseInt(e.target.dataset.index));
+            return;
+        }
+        
+        if (e.target.id === "cartBtn" || e.target.closest("#cartBtn")) {
+            const dropdown = document.getElementById("cart-dropdown");
+            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+            return;
+        }
+        
+        if (e.target.id === "checkoutBtn") {
+            if (cart.length === 0) {
+                alert("Tu carrito está vacío");
+                return;
+            }
+            let mensaje = "🛒 *Nuevo Pedido J&M STORE*\n\n";
+            let total = 0;
+            cart.forEach(item => {
+                mensaje += `• ${item.name} x${item.qty} = $${(item.price * item.qty).toLocaleString()}\n`;
+                total += item.price * item.qty;
+            });
+            mensaje += `\n💰 *Total:* $${total.toLocaleString()}\n\n👤 Nombre:\n📍 Dirección:\n📞 Teléfono:`;
+            window.open("https://wa.me/573213850020?text=" + encodeURIComponent(mensaje), "_blank");
+            return;
+        }
+    });
+    
+    // Cerrar modales
+    document.querySelector(".close-product")?.addEventListener("click", () => {
+        document.getElementById("productModal").style.display = "none";
+    });
+    
+    document.querySelector(".close-modal")?.addEventListener("click", () => {
+        document.getElementById("imageModal").style.display = "none";
+    });
+    
+    document.querySelector(".prev")?.addEventListener("click", prevImage);
+    document.querySelector(".next")?.addEventListener("click", nextImage);
+    
+    document.getElementById("modal-add")?.addEventListener("click", () => {
+        if (currentProduct) {
+            addToCart(currentProduct.name, currentProduct.price);
+            document.getElementById("productModal").style.display = "none";
+        }
+    });
+    
+    document.getElementById("searchBtn")?.addEventListener("click", searchProducts);
+    document.getElementById("searchInput")?.addEventListener("input", searchProducts);
+    document.getElementById("searchInput")?.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") searchProducts();
+    });
+    
+    document.getElementById("productModal")?.addEventListener("click", (e) => {
+        if (e.target === document.getElementById("productModal")) {
+            document.getElementById("productModal").style.display = "none";
+        }
+    });
+    
+    document.getElementById("imageModal")?.addEventListener("click", (e) => {
+        if (e.target === document.getElementById("imageModal")) {
+            document.getElementById("imageModal").style.display = "none";
+        }
+    });
+    
+    document.addEventListener("click", (e) => {
+        const cartBox = document.querySelector(".cart-box");
+        const dropdown = document.getElementById("cart-dropdown");
+        if (cartBox && !cartBox.contains(e.target) && dropdown.style.display === "block") {
+            dropdown.style.display = "none";
+        }
+    });
+});
+</script>
+</body>
+</html>

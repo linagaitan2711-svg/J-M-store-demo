@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+<title>J&M STORE · Tienda Online</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+    font-size: 16px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Header */
+.top-bar {
+    background: #000000;
+    color: white;
+    text-align: center;
+    padding: 12px 8px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+}
+
+.main-header {
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo img {
+    height: 45px;
+    width: auto;
+    border-radius: 8px;
+}
+
+.logo span {
+    color: #ff3c00;
+}
+
+/* Menú hamburguesa */
+.mobile-menu-btn {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.mobile-menu-btn:hover {
+    background: #f5f5f5;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 40px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #1a1a1a;
+    font-size: 15px;
+    transition: 0.3s;
+    padding: 8px 0;
+    cursor: pointer;
+}
+
+.nav-menu a:hover {
+    color: #ff3c00;
+}
+
+.header-icons {
+    display: flex;
+    gap: 20px;
+}
+
+.header-icons i {
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.header-icons i:hover {
+    background: #f5f5f5;
+    color: #ff3c00;
+}
+
+/* Hero Section - CON SLIDER */
+.hero {
+    max-width: 1400px;
+    margin: 30px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.hero-content h1 {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+}
+
+.hero-content h1 span {
+    color: #ff3c00;
+    display: block;
+    font-size: 56px;
+}
+
+.hero-content p {
+    font-size: 17px;
+    color: #666;
+    margin-bottom: 30px;
+    max-width: 500px;
+    line-height: 1.6;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-primary {
+    background: #ff3c00;
+    color: white;
+    border: none;
+    padding: 16px 35px;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    min-height: 52px;
+    min-width: 160px;
+}
+
+.btn-primary:hover {
+    background: #1a1a1a;
+    transform: translateY(-3px);
+}
+
+/* ===== SLIDER DE IMÁGENES ===== */
+.hero-image {
+    position: relative;
+    width: 100%;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+    aspect-ratio: 4/3;
+}
+
+.slider-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.slider-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    border-radius: 30px;
+}
+
+.slider-img.active {
+    opacity: 1;
+}
+
+/* Indicadores del slider */
+.slider-indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.slider-indicators span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.slider-indicators span.active {
+    background: #ff3c00;
+    transform: scale(1.2);
+}
+
+/* Featured Badge */
+.featured-badge {
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 0 20px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.badge-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f8f8f8;
+    padding: 15px 25px;
+    border-radius: 50px;
+    flex: 1 1 auto;
+    min-width: 200px;
+}
+
+.badge-item i {
+    font-size: 24px;
+    color: #ff3c00;
+}
+
+.badge-item span {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Categories Section */
+.categories-section {
+    max-width: 1400px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.section-header h2 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.section-header a {
+    color: #666;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: 0.3s;
+    padding: 10px 15px;
+}
+
+.section-header a:hover {
+    color: #ff3c00;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.category-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.3s;
+    aspect-ratio: 3/4;
+    scroll-snap-align: start;
+}
+
+.category-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.category-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.category-card:hover img {
+    transform: scale(1.1);
+}
+
+.category-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    color: white;
+    padding: 25px 15px 15px;
+}
+
+.category-overlay h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.category-overlay p {
+    font-size: 13px;
+    opacity: 0.9;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.category-overlay .btn-small {
+    background: white;
+    color: #1a1a1a;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+    min-height: 44px;
+}
+
+.category-overlay .btn-small:hover {
+    background: #ff3c00;
+    color: white;
+}
+
+/* Products Section */
+.products-section {
+    max-width: 1400px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.product-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: 0.3s;
+    border: 1px solid #f0f0f0;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    border-color: transparent;
+}
+
+.product-image {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 15px;
+}
+
+.product-category {
+    font-size: 11px;
+    color: #ff3c00;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+}
+
+.product-title {
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.product-price {
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.product-btn {
+    width: 100%;
+    padding: 14px 10px;
+    background: transparent;
+    border: 2px solid #1a1a1a;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    min-height: 48px;
+    font-size: 15px;
+}
+
+.product-btn:hover {
+    background: #1a1a1a;
+    color: white;
+}
+
+/* Newsletter */
+.newsletter {
+    max-width: 1400px;
+    margin: 60px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.newsletter h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    line-height: 1.3;
+    color: #1a1a1a;
+}
+
+.newsletter p {
+    color: #666;
+    margin-bottom: 25px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.newsletter-form {
+    display: flex;
+    max-width: 500px;
+    margin: 0 auto;
+    gap: 10px;
+}
+
+.newsletter-input {
+    flex: 1;
+    padding: 16px 20px;
+    border: 1px solid #ddd;
+    border-radius: 40px;
+    font-size: 16px;
+    min-height: 52px;
+}
+
+.newsletter-input:focus {
+    outline: none;
+    border-color: #ff3c00;
+}
+
+.newsletter-btn {
+    background: #ff3c00;
+    color: white;
+    border: none;
+    padding: 16px 30px;
+    border-radius: 40px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    min-height: 52px;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+.newsletter-btn:hover {
+    background: #1a1a1a;
+}
+
+/* Footer */
+.footer {
+    background: #1a1a1a;
+    color: white;
+    padding: 50px 20px 30px;
+    margin-top: 60px;
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+}
+
+.footer-column h4 {
+    font-size: 17px;
+    margin-bottom: 20px;
+    color: #ff3c00;
+}
+
+.footer-column ul {
+    list-style: none;
+}
+
+.footer-column ul li {
+    margin-bottom: 12px;
+}
+
+.footer-column ul li a {
+    color: #999;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 14px;
+    line-height: 1.6;
+    display: inline-block;
+    padding: 5px 0;
+    cursor: pointer;
+}
+
+.footer-column ul li a:hover {
+    color: white;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.social-links i {
+    font-size: 24px;
+    color: #999;
+    transition: 0.3s;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #333;
+}
+
+.social-links i:hover {
+    background: #ff3c00;
+    color: white;
+}
+
+.footer-bottom {
+    max-width: 1400px;
+    margin: 40px auto 0;
+    padding-top: 30px;
+    border-top: 1px solid #333;
+    text-align: center;
+    color: #666;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+    .categories-grid,
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .hero-content h1 {
+        font-size: 40px;
+    }
+    
+    .hero-content h1 span {
+        font-size: 48px;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: flex;
+    }
+    
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        padding: 20px 0;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        z-index: 1000;
+        border-radius: 0 0 20px 20px;
+    }
+    
+    .nav-menu.active {
+        display: flex;
+    }
+    
+    .nav-menu a {
+        width: 100%;
+        text-align: center;
+        padding: 16px 20px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .nav-menu a:last-child {
+        border-bottom: none;
+    }
+    
+    .header-icons {
+        gap: 10px;
+    }
+    
+    .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 30px;
+    }
+    
+    .hero-content p {
+        margin: 0 auto 25px;
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+    }
+    
+    .btn-primary {
+        min-width: 140px;
+        padding: 14px 25px;
+    }
+    
+    .hero-image {
+        aspect-ratio: 4/3;
+        max-height: 350px;
+    }
+    
+    .featured-badge {
+        flex-direction: column;
+    }
+    
+    .badge-item {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .categories-grid,
+    .products-grid,
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+    }
+    
+    .newsletter-btn {
+        width: 100%;
+    }
+    
+    .section-header h2 {
+        font-size: 28px;
+    }
+    
+    .category-card {
+        min-height: 350px;
+    }
+    
+    .product-card {
+        max-width: 100%;
+    }
+    
+    .categories-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 15px;
+        padding: 5px 0 20px;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .categories-grid::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .category-card {
+        min-width: 280px;
+        scroll-snap-align: start;
+    }
+}
+
+@media (max-width: 480px) {
+    .top-bar {
+        font-size: 11px;
+        padding: 10px 5px;
+    }
+    
+    .hero-content h1 {
+        font-size: 32px;
+    }
+    
+    .hero-content h1 span {
+        font-size: 38px;
+    }
+    
+    .hero-content p {
+        font-size: 15px;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .btn-primary {
+        width: 100%;
+    }
+    
+    .badge-item {
+        min-width: 100%;
+    }
+    
+    .newsletter h2 {
+        font-size: 24px;
+    }
+}
+</style>
+</head>
+<body>
+<!-- Top Bar -->
+<div class="top-bar">
+    🚀 ENVÍOS GRATIS A TODO COLOMBIA EN COMPRAS MAYORES A $350.000
+</div>
+
+<!-- Header -->
+<div class="main-header">
+    <div class="logo">
+        <img src="logojim.jpeg" alt="J&M Store Logo">
+        <span>STORE</span>
+    </div>
+    
+    <div class="mobile-menu-btn" onclick="toggleMenu()">☰</div>
+    
+    <div class="nav-menu" id="navMenu">
+        <a href="#">Inicio</a>
+        <a href="categorias.html">Colecciones</a>
+        <a href="https://wa.link/ow2gf9" target="_blank">Contacto</a>
+    </div>
+    
+    <div class="header-icons">
+        <i class="fa-regular fa-user"></i>
+        <i class="fa-regular fa-heart"></i>
+        <i class="fa-regular fa-cart-shopping"></i>
+    </div>
+</div>
+
+<!-- Hero Section CON SLIDER DE IMÁGENES -->
+<div class="hero">
+    <div class="hero-content">
+        <h1>
+            Economia <span>a un click</span>
+        </h1>
+        <p>Tienda Online de productos para tu hogar, mascotas y estilo. Encuentra el mejor precio con envíos a todo Colombia.</p>
+        <div class="hero-buttons">
+            <button class="btn-primary" onclick="window.location.href='categorias.html'">Comprar ahora</button>
+        </div>
+   </div>
+    <div class="hero-image">
+        <div class="slider-container">
+            <!-- 3 imágenes que rotarán cada 5 segundos (TODAS EN FORMATO JPEG) -->
+            <img src="slide1.jpeg" alt="Productos destacados" class="slider-img active" data-index="0">
+            <img src="slide2.jpeg" alt="Mascotas" class="slider-img" data-index="1">
+            <img src="slide3.jpeg" alt="Moda y accesorios" class="slider-img" data-index="2">
+            
+            <!-- Indicadores del slider (3 indicadores) -->
+            <div class="slider-indicators">
+                <span class="active" data-index="0"></span>
+                <span data-index="1"></span>
+                <span data-index="2"></span>
+            </div>
+        </div>
+    </div>
+        
+<!-- Featured Badge -->
+<div class="featured-badge">
+    <div class="badge-item">
+        <i class="fa-solid fa-truck-fast"></i>
+        <span>Envíos a todo Colombia</span>
+    </div>
+    <div class="badge-item">
+        <i class="fa-solid fa-medal"></i>
+        <span>+ de 1000 productos</span>
+    </div>
+    <div class="badge-item">
+        <i class="fa-solid fa-rotate-left"></i>
+        <span>Economia a un click</span>
+    </div>
+    <div class="badge-item">
+        <i class="fa-solid fa-credit-card"></i>
+        <span>Pagos seguros</span>
+    </div>
+</div>
+
+<!-- Categories Section -->
+<div class="categories-section">
+    <div class="section-header">
+        <h2>Categorías</h2>
+        <a href="categorias.html">Ver todas <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    
+    <div class="categories-grid">
+        <!-- Hogar -->
+        <div class="category-card" onclick="window.location.href='hogar.html'">
+            <img src="categoria-hogar.jpeg" alt="Hogar">
+            <div class="category-overlay">
+                <h3>Hogar</h3>
+                <p>Organizadores, cocina y más</p>
+                <button class="btn-small">Ver productos</button>
+            </div>
+        </div>
+        
+        <!-- Mascotas -->
+        <div class="category-card" onclick="window.location.href='mascotas.html'">
+            <img src="categoria-mascotas.jpeg" alt="Mascotas">
+            <div class="category-overlay">
+                <h3>Mascotas</h3>
+                <p>Todo para tu peludo</p>
+                <button class="btn-small">Ver productos</button>
+            </div>
+        </div>
+        
+        <!-- Moda -->
+        <div class="category-card" onclick="window.location.href='moda.html'">
+            <img src="categoria-moda.jpeg" alt="Moda">
+            <div class="category-overlay">
+                <h3>Cuidado, Belleza & accesorios</h3>
+                <p>Cuidado personal, belleza, accesorios</p>
+                <button class="btn-small">Ver productos</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Products Section - Más vendidos -->
+<div class="products-section">
+    <div class="section-header">
+        <h2>Más vendidos</h2>
+        <a href="tienda.html">Ver todos <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    
+    <div class="products-grid">
+        <div class="product-card">
+            <img src="closetarmarioesquinero.jpeg" alt="Producto" class="product-image" onerror="this.src='producto-default.jpeg'">
+            <div class="product-info">
+                <div class="product-category">Hogar</div>
+                <div class="product-title">Closet Armario Esquinero</div>
+                <div class="product-price">$89.900</div>
+                <button class="product-btn" onclick="comprar('Closet Armario Esquinero')">Agregar</button>
+            </div>
+        </div>
+        
+        <div class="product-card">
+            <img src="alimentador-dispensador-mascotas.jpeg" alt="Producto" class="product-image" onerror="this.src='producto-default.jpeg'">
+            <div class="product-info">
+                <div class="product-category">Mascotas</div>
+                <div class="product-title">Alimentador Dispensador</div>
+                <div class="product-price">$71.300</div>
+                <button class="product-btn" onclick="comprar('Alimentador Dispensador')">Agregar</button>
+            </div>
+        </div>
+        
+        <div class="product-card">
+            <img src="mochila.jpeg" alt="Producto" class="product-image" onerror="this.src='producto-default.jpeg'">
+            <div class="product-info">
+                <div class="product-category">Cuidado, belleza y accesorios</div>
+                <div class="product-title">Mochila Bolso Maleta</div>
+                <div class="product-price">$62.000</div>
+                <button class="product-btn" onclick="comprar('Mochila Bolso Maleta')">Agregar</button>
+            </div>
+        </div>
+        
+        <div class="product-card">
+            <img src="zapatero9niveles.jpeg" alt="Producto" class="product-image" onerror="this.src='producto-default.jpeg'">
+            <div class="product-info">
+                <div class="product-category">Hogar</div>
+                <div class="product-title">Zapatero 9 Niveles</div>
+                <div class="product-price">$49.600</div>
+                <button class="product-btn" onclick="comprar('Zapatero 9 Niveles')">Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Newsletter -->
+<div class="newsletter">
+    <h2>¿Quieres recibir ofertas exclusivas?</h2>
+    <p>Suscríbete a nuestro newsletter y recibe promociones especiales</p>
+    <div class="newsletter-form">
+        <input type="email" class="newsletter-input" placeholder="Tu correo electrónico">
+        <button class="newsletter-btn">Suscribirme</button>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <div class="footer-content">
+        <div class="footer-column">
+            <h4>J&M STORE</h4>
+            <ul>
+                <li><a href="#">Sobre nosotros</a></li>
+                <li><a href="#">Política de devoluciones</a></li>
+                <li><a href="#">Términos y condiciones</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-column">
+            <h4>Categorías</h4>
+            <ul>
+                <li><a href="hogar.html">Hogar</a></li>
+                <li><a href="mascotas.html">Mascotas</a></li>
+                <li><a href="moda.html">Moda & Belleza</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-column">
+            <h4>Contáctanos</h4>
+            <ul>
+                <li><a href="https://wa.link/ow2gf9" target="_blank">WhatsApp: +57 321 385 0020</a></li>
+                <li><a href="#">Email: tienda@jmstore.com</a></li>
+                <li><a href="#">Quebradanegra, Cundinamarca</a></li>
+            </ul>
+            <div class="social-links">
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-facebook"></i>
+                <i class="fa-brands fa-tiktok"></i>
+                <i class="fa-brands fa-whatsapp" onclick="window.open('https://wa.link/ow2gf9', '_blank')"></i>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        © 2026 J&M STORE · Todos los derechos reservados · Tienda Online
+    </div>
+</div>
+
+<script>
+function toggleMenu() {
+    const menu = document.getElementById('navMenu');
+    menu.classList.toggle('active');
+}
+
+document.querySelectorAll('.nav-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.getElementById('navMenu').classList.remove('active');
+    });
+});
+
+function comprar(producto) {
+    alert(`¡Has agregado ${producto} al carrito! 🛒\n\nEn la versión completa, esto te llevaría a WhatsApp para completar tu pedido.`);
+}
+
+document.addEventListener('click', (e) => {
+    const menu = document.getElementById('navMenu');
+    const btn = document.querySelector('.mobile-menu-btn');
+    
+    if (!menu.contains(e.target) && !btn.contains(e.target) && menu.classList.contains('active')) {
+        menu.classList.remove('active');
+    }
+});
+
+// ===== SLIDER DE IMÁGENES =====
+const sliderImages = document.querySelectorAll('.slider-img');
+const indicators = document.querySelectorAll('.slider-indicators span');
+let currentIndex = 0;
+let sliderInterval;
+
+function goToSlide(index) {
+    sliderImages.forEach(img => img.classList.remove('active'));
+    indicators.forEach(ind => ind.classList.remove('active'));
+    
+    sliderImages[index].classList.add('active');
+    indicators[index].classList.add('active');
+    currentIndex = index;
+}
+
+function nextSlide() {
+    let next = (currentIndex + 1) % sliderImages.length;
+    goToSlide(next);
+}
+
+function startSlider() {
+    sliderInterval = setInterval(nextSlide, 5000);
+}
+
+function stopSlider() {
+    clearInterval(sliderInterval);
+}
+
+indicators.forEach((ind, index) => {
+    ind.addEventListener('click', () => {
+        stopSlider();
+        goToSlide(index);
+        startSlider();
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    startSlider();
+});
+
+const heroImage = document.querySelector('.hero-image');
+heroImage.addEventListener('mouseenter', stopSlider);
+heroImage.addEventListener('mouseleave', startSlider);
+</script>
+</body>
+</html>

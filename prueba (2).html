@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+<title>J&M STORE · Categorías</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f8f9fa;
+    color: #1a1a1a;
+}
+
+/* Header */
+.top-bar {
+    background: #000000;
+    color: white;
+    text-align: center;
+    padding: 12px 8px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+}
+
+.main-header {
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.logo span {
+    color: #ff3c00;
+}
+
+.header-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.header-icons i {
+    font-size: 20px;
+    cursor: pointer;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.header-icons i:hover {
+    background: #f5f5f5;
+    color: #ff3c00;
+}
+
+/* Botón volver */
+.back-button {
+    margin: 16px 16px 0;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    transition: 0.3s;
+    padding: 8px 0;
+}
+
+.back-btn:hover {
+    color: #ff3c00;
+}
+
+/* Hero de categorías */
+.categories-hero {
+    margin: 24px 16px;
+    text-align: center;
+}
+
+.categories-hero h1 {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: #1a1a1a;
+}
+
+.categories-hero p {
+    font-size: 15px;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* Grid de categorías */
+.categories-grid {
+    margin: 30px 16px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.category-item {
+    background: white;
+    border-radius: 20px;
+    padding: 24px 20px;
+    text-align: left;
+    transition: 0.3s;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border: 1px solid #f0f0f0;
+    position: relative;
+    overflow: hidden;
+}
+
+.category-item:active {
+    transform: scale(0.98);
+}
+
+.category-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #ff3c00;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: left;
+}
+
+.category-item:hover::before {
+    transform: scaleX(1);
+}
+
+.category-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+}
+
+.category-item h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #1a1a1a;
+}
+
+.category-item p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.category-btn {
+    background: transparent;
+    border: 2px solid;
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.category-btn:active {
+    transform: scale(0.97);
+}
+
+/* Colores específicos para cada categoría */
+.category-item.hogar .category-icon { color: #ff7b00; }
+.category-item.hogar .category-btn { border-color: #ff7b00; color: #ff7b00; }
+.category-item.hogar .category-btn:active { background: #ff7b00; color: white; }
+.category-item.hogar::before { background: #ff7b00; }
+
+.category-item.mascotas .category-icon { color: #4CAF50; }
+.category-item.mascotas .category-btn { border-color: #4CAF50; color: #4CAF50; }
+.category-item.mascotas .category-btn:active { background: #4CAF50; color: white; }
+.category-item.mascotas::before { background: #4CAF50; }
+
+.category-item.moda .category-icon { color: #e63973; }
+.category-item.moda .category-btn { border-color: #e63973; color: #e63973; }
+.category-item.moda .category-btn:active { background: #e63973; color: white; }
+.category-item.moda::before { background: #e63973; }
+
+.category-item.herramientas .category-icon { color: #2196F3; }
+.category-item.herramientas .category-btn { border-color: #2196F3; color: #2196F3; }
+.category-item.herramientas .category-btn:active { background: #2196F3; color: white; }
+.category-item.herramientas::before { background: #2196F3; }
+
+.category-item.escolar .category-icon { color: #9C27B0; }
+.category-item.escolar .category-btn { border-color: #9C27B0; color: #9C27B0; }
+.category-item.escolar .category-btn:active { background: #9C27B0; color: white; }
+.category-item.escolar::before { background: #9C27B0; }
+
+.category-item.tecnologia .category-icon { color: #00BCD4; }
+.category-item.tecnologia .category-btn { border-color: #00BCD4; color: #00BCD4; }
+.category-item.tecnologia .category-btn:active { background: #00BCD4; color: white; }
+.category-item.tecnologia::before { background: #00BCD4; }
+
+/* Footer */
+.footer {
+    background: #1a1a1a;
+    color: white;
+    padding: 40px 16px 25px;
+    margin-top: 40px;
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.footer-column h4 {
+    font-size: 16px;
+    margin-bottom: 16px;
+    color: #ff3c00;
+}
+
+.footer-column ul {
+    list-style: none;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+    color: #999;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 13px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.footer-column ul li a:active {
+    color: white;
+}
+
+.social-links {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+.social-links i {
+    font-size: 20px;
+    color: #999;
+    transition: 0.3s;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #333;
+}
+
+.social-links i:active {
+    background: #ff3c00;
+    color: white;
+}
+
+.footer-bottom {
+    max-width: 1400px;
+    margin: 30px auto 0;
+    padding-top: 20px;
+    border-top: 1px solid #333;
+    text-align: center;
+    color: #666;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+/* MODAL - Ventana emergente */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 20px;
+    max-width: 500px;
+    width: 100%;
+    max-height: 85%;
+    overflow-y: auto;
+    position: relative;
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    padding: 20px 20px 15px;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background: white;
+    border-radius: 20px 20px 0 0;
+}
+
+.modal-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.modal-close {
+    font-size: 28px;
+    cursor: pointer;
+    color: #999;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.modal-close:hover {
+    background: #f5f5f5;
+    color: #ff3c00;
+}
+
+.modal-body {
+    padding: 20px;
+    line-height: 1.6;
+    color: #444;
+    font-size: 14px;
+}
+
+.modal-body h3 {
+    font-size: 18px;
+    color: #ff3c00;
+    margin: 20px 0 10px;
+}
+
+.modal-body h3:first-child {
+    margin-top: 0;
+}
+
+.modal-body p {
+    margin-bottom: 12px;
+}
+
+.modal-body ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.modal-body li {
+    margin-bottom: 8px;
+}
+
+/* Touch optimizations */
+button, .category-item, .back-btn, .header-icons i, .footer a, .social-links i {
+    -webkit-tap-highlight-color: transparent;
+}
+
+@media (min-width: 768px) {
+    .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 800px;
+        margin: 30px auto;
+    }
+    
+    .footer-content {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    .footer-column {
+        flex: 1;
+        min-width: 200px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .categories-grid {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 1000px;
+    }
+}
+
+@media (max-width: 480px) {
+    .categories-hero h1 {
+        font-size: 28px;
+    }
+    
+    .category-item h3 {
+        font-size: 20px;
+    }
+    
+    .modal-header h2 {
+        font-size: 18px;
+    }
+    
+    .modal-body {
+        font-size: 13px;
+        padding: 16px;
+    }
+}
+</style>
+</head>
+<body>
+<!-- Top Bar -->
+<div class="top-bar">
+    🚀 ENVÍOS GRATIS A TODO COLOMBIA EN COMPRAS MAYORES A $350.000
+</div>
+
+<!-- Header -->
+<div class="main-header">
+    <div class="logo">J&M <span>STORE</span></div>
+    <div class="header-icons">
+        <i class="fa-regular fa-user"></i>
+        <i class="fa-regular fa-heart"></i>
+        <i class="fa-regular fa-cart-shopping"></i>
+    </div>
+</div>
+
+<!-- Botón volver -->
+<div class="back-button">
+    <a href="index.html" class="back-btn">
+        <i class="fa-solid fa-arrow-left"></i> Volver al inicio
+    </a>
+</div>
+
+<!-- Hero de categorías -->
+<div class="categories-hero">
+    <h1>Categorías</h1>
+    <p>Explora todas nuestras categorías y encuentra lo que buscas</p>
+</div>
+
+<!-- Grid de categorías -->
+<div class="categories-grid">
+    <div class="category-item hogar" onclick="window.location.href='hogar.html'">
+        <div class="category-icon"><i class="fa-solid fa-house"></i></div>
+        <h3>Hogar</h3>
+        <p>Organizadores, cocina y más</p>
+        <button class="category-btn">Ver productos</button>
+    </div>
+
+    <div class="category-item mascotas" onclick="window.location.href='mascotas.html'">
+        <div class="category-icon"><i class="fa-solid fa-paw"></i></div>
+        <h3>Mascotas</h3>
+        <p>Todo para tu peludo</p>
+        <button class="category-btn">Ver productos</button>
+    </div>
+
+    <div class="category-item moda" onclick="window.location.href='moda.html'">
+        <div class="category-icon"><i class="fa-solid fa-shirt"></i></div>
+        <h3>Moda & Belleza</h3>
+        <p>Cuidado personal, belleza y accesorios</p>
+        <button class="category-btn">Ver productos</button>
+    </div>
+
+    <div class="category-item herramientas" onclick="window.location.href='herramientas.html'">
+        <div class="category-icon"><i class="fa-solid fa-tools"></i></div>
+        <h3>Herramientas</h3>
+        <p>Carros, motos, taller y bricolaje</p>
+        <button class="category-btn">Ver productos</button>
+    </div>
+
+    <div class="category-item escolar" onclick="window.location.href='escolar.html'">
+        <div class="category-icon"><i class="fa-solid fa-pencil"></i></div>
+        <h3>Escolar & Juguetes</h3>
+        <p>Útiles, mochilas y diversión</p>
+        <button class="category-btn">Ver colección</button>
+    </div>
+
+    <div class="category-item tecnologia" onclick="window.location.href='tecnologia.html'">
+        <div class="category-icon"><i class="fa-solid fa-laptop"></i></div>
+        <h3>Tecnología</h3>
+        <p>Cámaras, alarmas y computo</p>
+        <button class="category-btn">Descubrir</button>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <div class="footer-content">
+        <div class="footer-column">
+            <h4>J&M STORE</h4>
+            <ul>
+                <li><a onclick="openModal('nosotros')">Sobre nosotros</a></li>
+                <li><a onclick="openModal('terminos')">Términos y condiciones</a></li>
+                <li><a onclick="openModal('privacidad')">Política de privacidad</a></li>
+                <li><a onclick="openModal('trabaja')">Trabaja con nosotros</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-column">
+            <h4>Ayuda</h4>
+            <ul>
+                <li><a onclick="openModal('faq')">Preguntas frecuentes</a></li>
+                <li><a onclick="openModal('envios')">Envíos y entregas</a></li>
+                <li><a onclick="openModal('devoluciones')">Devoluciones</a></li>
+                <li><a onclick="openModal('pagos')">Métodos de pago</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-column">
+            <h4>Categorías</h4>
+            <ul>
+                <li><a href="hogar.html">Hogar</a></li>
+                <li><a href="mascotas.html">Mascotas</a></li>
+                <li><a href="moda.html">Moda & Belleza</a></li>
+                <li><a href="herramientas.html">Herramientas</a></li>
+                <li><a href="escolar.html">Escolar & Juguetes</a></li>
+                <li><a href="tecnologia.html">Tecnología</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-column">
+            <h4>Contáctanos</h4>
+            <ul>
+                <li><a href="https://wa.link/ow2gf9" target="_blank">WhatsApp: +57 321 385 0020</a></li>
+                <li><a href="#">Email: tienda@jmstore.com</a></li>
+                <li><a href="#">Bogotá, Colombia</a></li>
+            </ul>
+            <div class="social-links">
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-facebook"></i>
+                <i class="fa-brands fa-tiktok"></i>
+                <i class="fa-brands fa-whatsapp" onclick="window.open('https://wa.link/ow2gf9', '_blank')"></i>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        © 2026 J&M STORE · Todos los derechos reservados · Tienda Online
+    </div>
+</div>
+
+<!-- MODAL (Ventana emergente) -->
+<div id="infoModal" class="modal" onclick="closeModalOnOutside(event)">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modalTitle">Título</h2>
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+        </div>
+        <div class="modal-body" id="modalBody">
+            Contenido aquí
+        </div>
+    </div>
+</div>
+
+<script>
+// Contenido de cada sección
+const modalContent = {
+    nosotros: {
+        title: "Sobre nosotros",
+        body: '<h3>✨ ¿Quiénes somos?</h3><p>J&M STORE nació en 2026 con una misión clara: <strong>llevar productos a todo Colombia al mejor precio</strong>. Somos una tienda online apasionada por ofrecer artículos para el hogar, mascotas, moda, herramientas, tecnología y más.</p><h3>🎯 Nuestra misión</h3><p>Ofrecer precios justos y un servicio excepcional. Queremos que comprar en línea sea fácil, seguro y divertido.</p><h3>💎 Nuestros valores</h3><ul><li><strong>Cercanía:</strong> Atención personalizada y rápida.</li><li><strong>Confianza:</strong> Transparencia en cada compra.</li><li><strong>Pasión:</strong> Amamos lo que hacemos y se nota.</li></ul><h3>📍 ¿Dónde estamos?</h3><p>Operamos desde Quebradanegra, Cundinamarca, con envíos a todo el territorio colombiano. ¡Estamos para servirte!</p><h3>📞 Contáctanos</h3><p>WhatsApp: <strong>+57 321 385 0020</strong><br>Email: tienda@jmstore.com</p>'
+    },
+    terminos: {
+        title: "Términos y condiciones",
+        body: '<h3>📋 Aceptación de términos</h3><p>Al realizar una compra en J&M STORE, aceptas los siguientes términos y condiciones.</p><h3>🛒 Productos y precios</h3><p>Los precios están expresados en pesos colombianos (COP) e incluyen IVA. Nos reservamos el derecho de modificar precios sin previo aviso.</p><h3>📦 Disponibilidad</h3><p>Todos los productos están sujetos a disponibilidad. En caso de no contar con stock, te contactaremos para ofrecer alternativas o reembolsar tu pago.</p><h3>🚚 Envíos</h3><p>Los envíos se realizan a todo Colombia. Los tiempos de entrega varían según la ubicación (2-7 días hábiles).</p><h3>↩️ Devoluciones</h3><p>Aceptamos devoluciones dentro de los 5 días hábiles posteriores a la recepción del producto, siempre que esté en perfectas condiciones.</p><h3>🔒 Privacidad</h3><p>Tus datos personales serán tratados conforme a nuestra Política de Privacidad.</p><h3>⚖️ Ley aplicable</h3><p>Estos términos se rigen por las leyes colombianas.</p>'
+    },
+    privacidad: {
+        title: "Política de privacidad",
+        body: '<h3>🔐 Protección de tus datos</h3><p>En J&M STORE nos tomamos muy en serio tu privacidad. Esta política explica cómo recopilamos, usamos y protegemos tu información personal.</p><h3>📊 Información que recopilamos</h3><ul><li>Nombre completo</li><li>Dirección de correo electrónico</li><li>Número de teléfono</li><li>Dirección de envío</li><li>Historial de compras</li></ul><h3>🔧 Uso de la información</h3><p>Usamos tus datos para procesar pedidos, enviar actualizaciones de tu compra, mejorar nuestros servicios y enviar promociones si has dado tu consentimiento.</p><h3>🛡️ Seguridad</h3><p>Implementamos medidas de seguridad técnicas y organizativas para proteger tu información contra acceso no autorizado.</p><h3>📧 Tus derechos</h3><p>Puedes solicitar acceso, rectificación o eliminación de tus datos escribiendo a tienda@jmstore.com.</p><h3>🍪 Cookies</h3><p>Usamos cookies para mejorar tu experiencia de navegación. Puedes desactivarlas en la configuración de tu navegador.</p>'
+    },
+    trabaja: {
+        title: "Trabaja con nosotros",
+        body: '<h3>🚀 Únete al equipo J&M STORE</h3><p>Estamos buscando personas talentosas y apasionadas para crecer juntos.</p><h3>💼 Vacantes actuales</h3><ul><li><strong>Asesor comercial online</strong> - Remoto</li><li><strong>Community manager</strong> - Medio tiempo</li><li><strong>Auxiliar de bodega</strong> - Quebradanegra, Cundinamarca</li><li><strong>Diseñador gráfico</strong> - Freelance</li></ul><h3>📝 ¿Cómo postularte?</h3><p>Envía tu hoja de vida al correo <strong>talento@jmstore.com</strong> con el asunto: "[Vacante] - Tu nombre".</p><h3>❤️ Lo que ofrecemos</h3><ul><li>Ambiente laboral flexible</li><li>Crecimiento profesional</li><li>Descuentos exclusivos en productos</li><li>Trabajo remoto (según posición)</li></ul><h3>🌟 Perfil que buscamos</h3><p>Personas proactivas, responsables, con ganas de aprender y trabajar en equipo. ¡Si te identificas, contáctanos!</p>'
+    },
+    faq: {
+        title: "Preguntas frecuentes",
+        body: '<h3>❓ ¿Cómo realizo una compra?</h3><p>Selecciona los productos, agrégalos al carrito y selecciona el botón comprar. Cuando selecciones el botón te dirigirán a WhatsApp donde te comunicarás con un asesor para confirmar tu pedido.</p><h3>💳 ¿Cuáles son los métodos de pago?</h3><p>Aceptamos transferencias bancarias, Nequi, Bancolombia y pago contra entrega en Quebradanegra, Cundinamarca.</p><h3>🚚 ¿Cuánto tardan los envíos?</h3><p>Los envíos se entregan todos los 15 y 30 de cada mes.</p><h3>💰 ¿Los precios incluyen envío?</h3><p>Los envíos son GRATIS en compras mayores a $350.000 COP. Para compras menores, el costo varía según la zona.</p><h3>🔒 ¿Es seguro comprar aquí?</h3><p>Sí, trabajamos con pasarelas de pago seguras y protegemos tus datos.</p><h3>📞 ¿Cómo me contacto con servicio al cliente?</h3><p>Escríbenos al WhatsApp <strong>+57 321 385 0020</strong> o al correo tienda@jmstore.com. Respondemos en menos de 1 hora en horario laboral.</p>'
+    },
+    envios: {
+        title: "Envíos y entregas",
+        body: '<h3>🚚 Zonas de cobertura</h3><p>Realizamos envíos a <strong>todo el territorio colombiano</strong>.</p><h3>⏱️ Tiempos de entrega</h3><ul><li><strong>Bogotá y principales ciudades:</strong> 2-3 días hábiles</li><li><strong>Otras ciudades capitales:</strong> 3-5 días hábiles</li><li><strong>Zonas rurales y pueblos:</strong> 5-7 días hábiles</li></ul><h3>💰 Costos de envío</h3><p>✅ <strong>GRATIS</strong> en compras superiores a $350.000 COP<br>📦 Compras menores: $12.900 COP (ciudades principales)</p><h3>📦 Seguimiento</h3><p>Una vez despachado tu pedido, te enviaremos el número de guía por WhatsApp para que puedas rastrearlo.</p><h3>⚠️ ¿Problemas con tu pedido?</h3><p>Si tu producto no llega en el tiempo estimado, contáctanos y gestionaremos la novedad con la transportadora.</p>'
+    },
+    devoluciones: {
+        title: "Devoluciones y garantías",
+        body: '<h3>↩️ Política de devoluciones</h3><p>Tienes <strong>5 días hábiles</strong> después de recibir tu producto para solicitar una devolución, siempre que el producto esté en su empaque original y sin uso.</p><h3>🔧 Garantía</h3><p>Todos nuestros productos tienen garantía de <strong>3 meses contra defectos de fábrica</strong>.</p><h3>📝 ¿Cómo solicitar una devolución?</h3><ol><li>Contáctanos por WhatsApp explicando el motivo</li><li>Envía fotos o video del producto</li><li>Espera la autorización de devolución</li><li>Empaca el producto y coordina la recogida</li></ol><h3>💰 Reembolsos</h3><p>Una vez recibido y verificado el producto, realizaremos el reembolso en un plazo de 3-5 días hábiles.</p>'
+    },
+    pagos: {
+        title: "Métodos de pago",
+        body: '<h3>💳 Aceptamos estos métodos de pago</h3><h3>🏦 Transferencia bancaria</h3><p><strong>Bancolombia</strong><br>Titular: J&M STORE SAS</p><h3>📱 Nequi</h3><p><strong>Nequi:</strong> 3213850020</p><h3>💵 Pago contra entrega</h3><p>Disponible en Quebradanegra, Cundinamarca.</p><h3>🛡️ Seguridad</h3><p>Todos nuestros métodos de pago son seguros. No almacenamos información sensible de tus tarjetas.</p>'
+    }
+};
+
+// Función para abrir modal - VERSIÓN CORREGIDA
+function openModal(section) {
+    const modal = document.getElementById('infoModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBody = document.getElementById('modalBody');
+    
+    const content = modalContent[section];
+    if (content) {
+        modalTitle.innerText = content.title;
+        modalBody.innerHTML = content.body;
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    } else {
+        console.error('Sección no encontrada:', section);
+    }
+}
+
+function closeModal() {
+    const modal = document.getElementById('infoModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+function closeModalOnOutside(event) {
+    const modalContentElem = document.querySelector('.modal-content');
+    if (modalContentElem && !modalContentElem.contains(event.target)) {
+        closeModal();
+    }
+}
+
+// Cerrar con tecla ESC
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeModal();
+    }
+});
+
+// Verificar que todo funciona
+console.log('✅ Modales listos. Secciones disponibles:', Object.keys(modalContent));
+</script>
+</body>
+</html>

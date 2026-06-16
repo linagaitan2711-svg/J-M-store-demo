@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>J&M STORE - Mascotas</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #f6d5df;
+}
+
+/* BOTÓN VOLVER */
+.back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.back-btn {
+    background: #e63973;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(230, 57, 115, 0.3);
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: #c2185b;
+    transform: translateX(-5px);
+}
+
+/* CONTENEDOR PRINCIPAL */
+.wrapper {
+    width: 95%;
+    max-width: 1400px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+/* HEADER */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 700;
+    color: #e63973;
+}
+
+.cart-box {
+    position: relative;
+}
+
+.cart {
+    background: #e63973;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.cart-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 45px;
+    background: #fff;
+    width: 300px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    padding: 15px;
+    z-index: 100;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+.cart-item button {
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+/* HERO */
+.hero {
+    background: linear-gradient(135deg, #ff8fab, #ff4d6d);
+    padding: 40px;
+    border-radius: 20px;
+    color: #fff;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+/* SECCIÓN */
+.section {
+    margin-bottom: 50px;
+}
+
+.section h2 {
+    margin-bottom: 20px;
+    color: #e63973;
+    font-size: 28px;
+    border-left: 5px solid #e63973;
+    padding-left: 15px;
+}
+
+/* PRODUCTOS */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: #fafafa;
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(230, 57, 115, 0.15);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.price {
+    font-weight: 700;
+    font-size: 18px;
+    margin: 10px 0;
+    color: #e63973;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background: #e63973;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+    width: 100%;
+}
+
+.btn:hover {
+    background: #c2185b;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #ff8fab;
+    color: #fff;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .wrapper {
+        padding: 20px;
+    }
+    
+    .hero h1 {
+        font-size: 28px;
+    }
+    
+    .products {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .cart-box {
+        width: 100%;
+    }
+    
+    .cart {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .hero {
+        padding: 30px 20px;
+    }
+    
+    .hero h1 {
+        font-size: 24px;
+    }
+    
+    .back-btn {
+        padding: 8px 15px;
+        font-size: 12px;
+    }
+}
+
+/* MODAL DE IMAGEN */
+#imageModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#imageModal img {
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 10px;
+    transition: opacity 0.3s ease;
+}
+
+.modal-content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 22px;
+    width: 55px;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(6px);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+#imageModal:hover .prev,
+#imageModal:hover .next {
+    opacity: 1;
+}
+
+.prev {
+    left: 60px;
+}
+
+.next {
+    right: 60px;
+}
+
+.prev:hover, .next:hover {
+    background: white;
+    color: black;
+    transform: translateY(-50%) scale(1.1);
+}
+
+#imageModal .close {
+    position: absolute;
+    top: 40px;
+    right: 60px;
+    font-size: 22px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#imageModal .close:hover {
+    background: white;
+    color: black;
+    transform: scale(1.1);
+}
+
+.indicators {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.indicators span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.indicators span.active {
+    background: white;
+    transform: scale(1.2);
+}
+
+/* MODAL DE PRODUCTO */
+.product-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.product-content {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+}
+
+.product-content img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.close-product {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+}
+
+.close-product:hover {
+    color: #e63973;
+}
+</style>
+</head>
+<body>
+
+<!-- Botón volver al inicio -->
+<div class="back-button">
+    <a href="index.html" class="back-btn">
+        ← Volver al inicio
+    </a>
+</div>
+
+<div class="wrapper">
+    <header>
+        <div class="logo">J&M STORE</div>
+        <div class="cart-box">
+            <div class="cart" onclick="toggleCart()">
+                🛒 <span id="cart-count">0</span> | $<span id="cart-total">0</span>
+            </div>
+            <div class="cart-dropdown" id="cart-dropdown">
+                <div id="cart-items"></div>
+                <hr>
+                <strong>Total: $<span id="dropdown-total">0</span></strong>
+                <button class="btn" style="width:100%;margin-top:10px;" onclick="openCheckout()">Finalizar compra</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="hero">
+        <h1>🐾 Categoría Mascotas</h1>
+        <p>Todo para el cuidado, alimentación y diversión de tus peludos</p>
+    </div>
+
+    <div id="product-container">
+        <div class="section" data-category="Mascotas">
+            <h2>Todos los productos para Mascotas</h2>
+            <div class="products" id="productos-mascotas">
+                <!-- Producto 1: Alimentador Comedero Dispensador -->
+                <div class="card" data-name="Alimentador Comedero Dispensador para Mascotas" data-price="71300" data-description="Comedero automático dispensador para mascotas. Ideal para programar la alimentación de tu perro o gato." data-images="alimentador-dispensador-mascotas.jpeg">
+                    <img src="alimentador-dispensador-mascotas.jpeg" alt="Alimentador Dispensador" onerror="this.src='https://via.placeholder.com/300x200?text=Alimentador'">
+                    <h4>Alimentador Comedero Dispensador</h4>
+                    <div class="price">$71.300</div>
+                    <button class="btn add">Agregar al carrito</button>
+                </div>
+
+                <!-- Producto 2: Botilito Bebedero -->
+                <div class="card" data-name="Botilito Bebedero de Agua y Comida Mascota" data-price="29450" data-description="Botilito portátil 2 en 1: agua y comida para mascotas. Ideal para paseos y viajes." data-images="botilito-bebedero-mascota.jpeg">
+                    <img src="botilito-bebedero-mascota.jpeg" alt="Botilito Bebedero" onerror="this.src='https://via.placeholder.com/300x200?text=Botilito'">
+                    <h4>Botilito Bebedero Agua y Comida</h4>
+                    <div class="price">$29.450</div>
+                    <button class="btn add">Agregar al carrito</button>
+                </div>
+
+                <!-- Producto 3: Cepillo Mascota Botón Expulsor -->
+                <div class="card" data-name="Cepillo Mascota Botón Expulsor" data-price="18600" data-description="Cepillo para mascotas con botón expulsor de pelo. Fácil de limpiar y usar." data-images="cepillo-mascota-expulsor.jpeg">
+                    <img src="cepillo-mascota-expulsor.jpeg" alt="Cepillo Mascota" onerror="this.src='https://via.placeholder.com/300x200?text=Cepillo'">
+                    <h4>Cepillo Mascota Botón Expulsor</h4>
+                    <div class="price">$18.600</div>
+                    <button class="btn add">Agregar al carrito</button>
+                </div>
+
+                <!-- Producto 4: Cepillo Vapor Mascotas -->
+                <div class="card" data-name="Cepillo Vapor Mascotas" data-price="20150" data-description="Cepillo de vapor para mascotas. Ayuda a eliminar nudos y pelo muerto." data-images="cepillo-vapor-mascotas.jpeg">
+                    <img src="cepillo-vapor-mascotas.jpeg" alt="Cepillo Vapor" onerror="this.src='https://via.placeholder.com/300x200?text=Cepillo+Vapor'">
+                    <h4>Cepillo Vapor Mascotas</h4>
+                    <div class="price">$20.150</div>
+                    <button class="btn add">Agregar al carrito</button>
+                </div>
+
+                <!-- Producto 5: Cepillo 2 en 1 Mascotas -->
+                <div class="card" data-name="Cepillo 2 en 1 Mascotas" data-price="21700" data-description="Cepillo 2 en 1: cepillo y peine para mascotas. Doble función para un mejor cuidado." data-images="cepillo-2en1-mascotas.jpeg">
+                    <img src="cepillo-2en1-mascotas.jpeg" alt="Cepillo 2 en 1" onerror="this.src='https://via.placeholder.com/300x200?text=Cepillo+2en1'">
+                    <h4>Cepillo 2 en 1 Mascotas</h4>
+                    <div class="price">$21.700</div>
+                    <button class="btn add">Agregar al carrito</button>
+                </div>
+
+                <!-- Producto 6: Fuente Bebedero para Mascotas -->
+                <div class="card" data-name="Fuente Bebedero para Mascotas" data-price="49600" data-description="Fuente de agua para mascotas. Mantiene el agua fresca y en movimiento." data-images="fuente-bebedero-mascotas.jpeg">
+                    <img src="fuente-bebedero-mascotas.jpeg" alt="Fuente Bebedero" onerror="this.src='https://via.placeholder.com/300x200?text=Fuente'">
+                    <h4>Fuente Bebedero Mascotas</h4>
+                    <div class="price">$49.600</div>
+                    <button class="btn add">Agregar al carrito</button>
+                </div>
+
+                <!-- Producto 7: Fuente de Agua Mascotas Bebedero USB -->
+                <div class="card" data-name="Fuente de Agua Mascotas Bebedero USB" data-price="49600" data-description="Fuente de agua para mascotas con conexión USB. Agua fresca en circulación continua." data-images="fuente-agua-mascotas-usb.jpg">
+                    <img src="fuente-agua-mascotas-usb.jpeg" alt="Fuente USB" onerror="this.src='https://via.placeholder.com/300x200?text=Fuente+USB'">
+                    <h4>Fuente Agua Mascotas USB</h4>
+                    <div class="price">$49.600</div>
+                    <button class="btn add">Agregar al carrito</button>
+                </div>
+
+                <!-- Producto 8: Jeringa Dosificador Medicamentos Mascotas -->
+                <div class="card" data-name="Jeringa Dosificador Medicamentos Mascotas" data-price="41850" data-description="Jeringa dosificadora para medicamentos de mascotas. Fácil y precisa administración." data-images="jeringa-dosificador-mascotas.jpeg">
+                    <img src="jeringa-dosificador-mascotas.jpeg" alt="Jeringa Dosificador" onerror="this.src='https://via.placeholder.com/300x200?text=Jeringa'">
+                    <h4>Jeringa Dosificador Medicamentos</h4>
+                    <div class="price">$41.850</div>
+                    <button class="btn add">Agregar al carrito</button>
+                </div>
+
+                <!-- Producto 9: Mini Máquina Cortadora Pelo Patas Mascota -->
+                <div class="card" data-name="Mini Máquina Cortadora Pelo Patas Mascota" data-price="41850" data-description="Mini cortadora de pelo para patas de mascotas. Segura y fácil de usar." data-images="mini-cortadora-patas-mascota.jpeg">
+                    <img src="mini-cortadora-patas-mascota.jpeg" alt="Cortadora Patas" onerror="this.src='https://via.placeholder.com/300x200?text=Cortadora'">
+                    <h4>Mini Cortadora Pelo Patas</h4>
+                    <div class="price">$41.850</div>
+                    <button class="btn add">Agregar al carrito</button>
+                </div>
+
+                <!-- Producto 10: Peluca Orejas Mascotas Pequeñas -->
+                <div class="card" data-name="Peluca Orejas Mascotas Pequeñas" data-price="21700" data-description="Peluca divertida para orejas de mascotas pequeñas. Ideal para fotos y disfraces." data-images="peluca-orejas-mascotas.jpeg">
+                    <img src="peluca-orejas-mascotas.jpeg" alt="Peluca Orejas" onerror="this.src='https://via.placeholder.com/300x200?text=Peluca'">
+                    <h4>Peluca Orejas Mascotas Pequeñas</h4>
+                    <div class="price">$21.700</div>
+                    <button class="btn add">Agregar al carrito</button>
+                </div>
+
+        
+
+                <!-- Producto 12: Catnip para Gatos -->
+                <div class="card" data-name="Catnip para Gatos" data-price="13950" data-description="Catnip (hierba gatera) para gatos. Estimula el juego y la diversión." data-images="catnip-gatos.jpeg">
+                    <img src="catnip-gatos.jpeg" alt="Catnip" onerror="this.src='https://via.placeholder.com/300x200?text=Catnip'">
+                    <h4>Catnip para Gatos</h4>
+                    <div class="price">$13.950</div>
+                    <button class="btn add">Agregar al carrito</button>
+                </div>
+
+                <!-- Producto 13: Comedero Doble con Temporizador -->
+                <div class="card" data-name="Comedero Doble con Temporizador de Apertura de Alimento" data-price="77500" data-description="Comedero doble con temporizador programable. Abre automáticamente a la hora configurada." data-images="comedero-temporizador.jpeg">
+                    <img src="comedero-temporizador.jpeg" alt="Comedero Temporizador" onerror="this.src='https://via.placeholder.com/300x200?text=Comedero'">
+                    <h4>Comedero Doble con Temporizador</h4>
+                    <div class="price">$77.500</div>
+                    <button class="btn add">Agregar al carrito</button>
+                </div>
+
+                <!-- Producto 14: Correa Doble Retráctil para Perros -->
+                <div class="card" data-name="Correa Doble Retráctil para Perros" data-price="69750" data-description="Correa retráctil doble para perros. Ideal para pasear dos mascotas a la vez." data-images="correa-doble-retractil.jpeg">
+                    <img src="correa-doble-retractil.jpeg" alt="Correa Doble" onerror="this.src='https://via.placeholder.com/300x200?text=Correa'">
+                    <h4>Correa Doble Retráctil Perros</h4>
+                    <div class="price">$69.750</div>
+                    <button class="btn add">Agregar al carrito</button>
+                </div>
+
+        
+
+                <!-- Producto 16: Pet Zoom Cortadora de Pelo Mascotas -->
+                <div class="card" data-name="Pet Zoom Cortadora de Pelo Mascotas" data-price="69750" data-description="Cortadora de pelo Pet Zoom para mascotas. Silenciosa y precisa." data-images="pet-zoom.jpeg">
+                    <img src="pet-zoom.jpeg" alt="Pet Zoom" onerror="this.src='https://via.placeholder.com/300x200?text=Pet+Zoom'">
+                    <h4>Pet Zoom Cortadora de Pelo</h4>
+                    <div class="price">$69.750</div>
+                    <button class="btn add">Agregar al carrito</button>
+                </div>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 J&M STORE - Todos los derechos reservados
+    </footer>
+</div>
+
+<!-- MODAL PRODUCTO -->
+<div class="product-modal" id="productModal">
+    <div class="product-content">
+        <span class="close-product">&times;</span>
+        <img id="modal-image" src="" alt="Producto">
+        <h2 id="modal-name"></h2>
+        <p id="modal-description"></p>
+        <p>$<span id="modal-price"></span></p>
+        <button id="modal-add" class="btn">Agregar al carrito</button>
+    </div>
+</div>
+
+<!-- MODAL IMAGEN -->
+<div id="imageModal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <span class="prev">&#10094;</span>
+        <img id="modalImg" src="" alt="Imagen ampliada">
+        <span class="next">&#10095;</span>
+        <div class="indicators"></div>
+    </div>
+</div>
+
+<script>
+// Variables globales
+let cart = [];
+let orderCounter = localStorage.getItem("orderCounter") ? parseInt(localStorage.getItem("orderCounter")) : 1;
+
+// Cargar carrito del localStorage al iniciar
+document.addEventListener("DOMContentLoaded", function() {
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+        cart = JSON.parse(savedCart);
+        updateCart();
+    }
+    
+    // Inicializar eventos
+    initImageModal();
+    initProductModal();
+    initAddToCartButtons();
+});
+
+// Funciones del carrito
+function updateCart() {
+    let cartCount = 0;
+    let cartTotal = 0;
+    let cartItemsHTML = "";
+
+    cart.forEach((item, index) => {
+        cartCount += item.qty;
+        cartTotal += item.price * item.qty;
+        cartItemsHTML += `
+        <div class="cart-item">
+            ${item.name} x${item.qty}
+            <button onclick="removeItem(${index})">❌</button>
+        </div>`;
+    });
+
+    document.getElementById("cart-count").innerText = cartCount;
+    document.getElementById("cart-total").innerText = cartTotal.toLocaleString();
+    document.getElementById("dropdown-total").innerText = cartTotal.toLocaleString();
+    document.getElementById("cart-items").innerHTML = cartItemsHTML || "Carrito vacío";
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+function addToCart(name, price) {
+    let existing = cart.find(item => item.name === name);
+    if (existing) {
+        existing.qty++;
+    } else {
+        cart.push({ name, price, qty: 1 });
+    }
+    updateCart();
+    alert(`✅ ${name} agregado al carrito`);
+}
+
+function removeItem(index) {
+    cart.splice(index, 1);
+    updateCart();
+}
+
+window.removeItem = removeItem;
+
+function toggleCart() {
+    let dropdown = document.getElementById("cart-dropdown");
+    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+}
+
+window.toggleCart = toggleCart;
+
+// Inicializar botones Agregar al carrito
+function initAddToCartButtons() {
+    document.querySelectorAll(".add").forEach(btn => {
+        btn.addEventListener("click", e => {
+            e.stopPropagation();
+            let card = e.target.closest(".card");
+            let name = card.dataset.name;
+            let price = parseInt(card.dataset.price);
+            addToCart(name, price);
+        });
+    });
+}
+
+// Checkout por WhatsApp
+function openCheckout() {
+    if (cart.length === 0) {
+        alert("Tu carrito está vacío");
+        return;
+    }
+
+    let numero = "573213850020"; // Número de WhatsApp
+    let mensaje = "🛒 *Nuevo Pedido J&M STORE - Mascotas*\n\n";
+    let total = 0;
+
+    cart.forEach(item => {
+        mensaje += `• ${item.name} x${item.qty} = $${(item.price * item.qty).toLocaleString()}\n`;
+        total += item.price * item.qty;
+    });
+
+    mensaje += `\n💰 *Total:* $${total.toLocaleString()}`;
+    mensaje += "\n\n👤 Nombre:";
+    mensaje += "\n📍 Dirección:";
+    mensaje += "\n📞 Teléfono:";
+
+    let url = "https://wa.me/" + numero + "?text=" + encodeURIComponent(mensaje);
+    window.open(url, "_blank");
+}
+
+window.openCheckout = openCheckout;
+
+// Modal de producto
+function initProductModal() {
+    const productModal = document.getElementById("productModal");
+    const modalImage = document.getElementById("modal-image");
+    const modalName = document.getElementById("modal-name");
+    const modalDescription = document.getElementById("modal-description");
+    const modalPrice = document.getElementById("modal-price");
+    const modalAdd = document.getElementById("modal-add");
+    const closeProduct = document.querySelector(".close-product");
+
+    let selectedName = "";
+    let selectedPrice = 0;
+
+    document.querySelectorAll(".card").forEach(card => {
+        card.addEventListener("click", function(e) {
+            if (e.target.classList.contains("add") || e.target.tagName === "IMG") return;
+            
+            selectedName = card.dataset.name;
+            selectedPrice = parseInt(card.dataset.price);
+            
+            modalImage.src = card.querySelector("img").src;
+            modalName.innerText = selectedName;
+            modalDescription.innerText = card.dataset.description || "Sin descripción";
+            modalPrice.innerText = selectedPrice.toLocaleString();
+            
+            productModal.style.display = "flex";
+        });
+    });
+
+    modalAdd.addEventListener("click", function() {
+        addToCart(selectedName, selectedPrice);
+        productModal.style.display = "none";
+    });
+
+    closeProduct.addEventListener("click", function() {
+        productModal.style.display = "none";
+    });
+
+    productModal.addEventListener("click", function(e) {
+        if (e.target === productModal) {
+            productModal.style.display = "none";
+        }
+    });
+}
+
+// Modal de imagen
+function initImageModal() {
+    const imageModal = document.getElementById("imageModal");
+    const imageModalImg = document.getElementById("modalImg");
+    const closeZoom = document.querySelector("#imageModal .close");
+    const prevBtn = document.querySelector(".prev");
+    const nextBtn = document.querySelector(".next");
+    const indicatorsContainer = document.querySelector(".indicators");
+
+    let currentImages = [];
+    let currentIndex = 0;
+
+    function createIndicators() {
+        indicatorsContainer.innerHTML = "";
+        currentImages.forEach((_, index) => {
+            const dot = document.createElement("span");
+            if (index === currentIndex) dot.classList.add("active");
+            dot.addEventListener("click", () => {
+                currentIndex = index;
+                updateImage();
+            });
+            indicatorsContainer.appendChild(dot);
+        });
+    }
+
+    function updateImage() {
+        imageModalImg.style.opacity = 0;
+        setTimeout(() => {
+            imageModalImg.src = currentImages[currentIndex].startsWith('http') ? currentImages[currentIndex] : currentImages[currentIndex];
+            imageModalImg.style.opacity = 1;
+            document.querySelectorAll(".indicators span").forEach((dot, i) => {
+                dot.classList.toggle("active", i === currentIndex);
+            });
+        }, 150);
+    }
+
+    document.querySelectorAll(".card img").forEach(img => {
+        img.addEventListener("click", function(e) {
+            e.stopPropagation();
+            const card = this.closest(".card");
+            
+            if (card.dataset.images) {
+                currentImages = card.dataset.images.split(",").map(src => src.trim());
+            } else {
+                currentImages = [this.src];
+            }
+            
+            currentIndex = 0;
+            imageModalImg.src = currentImages[0];
+            imageModal.style.display = "flex";
+            createIndicators();
+        });
+    });
+
+    closeZoom.addEventListener("click", () => {
+        imageModal.style.display = "none";
+    });
+
+    imageModal.addEventListener("click", function(e) {
+        if (e.target === imageModal) {
+            imageModal.style.display = "none";
+        }
+    });
+
+    nextBtn.addEventListener("click", function(e) {
+        e.stopPropagation();
+        currentIndex = (currentIndex + 1) % currentImages.length;
+        updateImage();
+    });
+
+    prevBtn.addEventListener("click", function(e) {
+        e.stopPropagation();
+        currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+        updateImage();
+    });
+}
+
+// Cerrar carrito al hacer clic fuera
+document.addEventListener('click', function(e) {
+    const cartBox = document.querySelector('.cart-box');
+    const dropdown = document.getElementById('cart-dropdown');
+    
+    if (!cartBox.contains(e.target) && dropdown.style.display === 'block') {
+        dropdown.style.display = 'none';
+    }
+});
+</script>
+</body>
+</html>
